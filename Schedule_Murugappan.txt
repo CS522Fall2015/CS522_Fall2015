@@ -3,7 +3,7 @@ Task Name						Estimated Duration		Completion Date
 -------------------------------------------------------------------------------------------------------
 Pre-process client csv files				4 hours					10/29
 
-Create Layout for dashboard				4 hours					11/02
+Create Layout for dashboard				4 hours					11/03
 	
 Convert csv to readable json for map 			4 hours					11/01
 
