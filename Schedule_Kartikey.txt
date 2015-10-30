@@ -1,10 +1,10 @@
-----------------------------------------------------------------------------------------
-Task Name										Estimated Duration		Completion Date
-----------------------------------------------------------------------------------------
-CSV to JSON converter							3 hours					10/25
+--------------------------------------------------------------------------------------------------------
+Task Name						Estimated Duration		Completion Date
+---------------------------------------------------------------------------------------------------------
+CSV to JSON converter					3 hours					10/25
 
-create plot for line chart						4 hours					11/29
+create plot for line chart				4 hours					11/29
 	
-create plot for histogram			 			5 hours					11/03
+create plot for histogram			 	5 hours					11/03
 
-add button and hover functionality 				2 hours					11/05
+add button and hover functionality 			2 hours					11/05
