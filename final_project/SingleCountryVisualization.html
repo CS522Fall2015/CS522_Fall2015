@@ -6,7 +6,7 @@
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
     <script src="highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
-    <script src="test.js"></script>
+    <script src="singleCountryVisualization.js"></script>
    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body ng-app="dataCtrl" ng-controller="jsonDataCtrl">
@@ -17,7 +17,7 @@
 
 
     <input type="text" ng-model="paramSelected" uib-typeahead="param for param in params | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Parameter's Name..">
-
+	<br>
     <button class="btn btn-primary" ng-click="showChart(0)">Line Chart</button>
 	<button class="btn btn-primary" ng-click="showChart(1)">Bar Graph</button>
 
