@@ -7,9 +7,10 @@ module.controller("jsonDataCtrl", function($scope, $http) {
 	$scope.paramSelected = undefined;
 	$scope.countries = [];
 	$scope.params = [];
-
+	var checker = 0
 	jQuery.get('finalFile.json', function(data) {
-
+		
+			
 	 	$scope.jsonData = data;
 		//console.log("$scope.jsonData: "+ $scope.jsonData)
 	 	//var arr = JSON.parse(data);
@@ -31,8 +32,8 @@ module.controller("jsonDataCtrl", function($scope, $http) {
 		//console.log("$scope.countries: " + $scope.countries)
 		
 	 });
-
-
+	
+	
 	$scope.showChart = function(number){
 
 		$scope.chartData = [];
@@ -53,7 +54,6 @@ module.controller("jsonDataCtrl", function($scope, $http) {
 			}
 		});
 
-		
 		
 		for(key in $scope.paramData) {
 		    if($scope.paramData.hasOwnProperty(key)) {
@@ -97,89 +97,105 @@ module.controller("jsonDataCtrl", function($scope, $http) {
 			}
 				
 		}
-			
-		if(number == 0)
+		
+		if( $scope.newSeries.length == 0)
 		{
-			$('#container').highcharts({
+			console.log("checker: " + checker)
+			if(checker == 1)
+			{
+				$("#container").empty()
+			}
+			$("#container").append("<br><p id=\"inner\" style=\"font-size:160%\">No Information to Display!</p>")
+			checker = 1
 
-						title: {
-							text: $scope.paramSelected,
-							x: -20 //center
-						},
-						subtitle: {
-							text: 'For ' + $scope.countrySelected,
-							x: -20
-						},
-						xAxis: {
-							categories: $scope.newSeries
-						},
-						yAxis: {
-							title: {
-								text: $scope.paramSelected
-							},
-							plotLines: [{
-								value: 0,
-								width: 1,
-								color: '#808080'
-							}]
-						},
-						tooltip: {
-							valueSuffix: ' %'
-						},
-						legend: {
-							layout: 'vertical',
-							align: 'right',
-							verticalAlign: 'middle',
-							borderWidth: 0
-						},
-						series: [{
-							name: $scope.countrySelected,
-							data: $scope.newChartData
-						}]
-			});
 		}
 		else
 		{
-			$('#container').highcharts({
-						chart: {
-									type: 'column'
-						},
-						title: {
-							text: $scope.paramSelected,
-							x: -20 //center
-						},
-						subtitle: {
-							text: 'For ' + $scope.countrySelected,
-							x: -20
-						},
-						xAxis: {
-							categories: $scope.newSeries
-						},
-						yAxis: {
+			if(number == 0)
+			{
+				checker = 1
+				$('#container').highcharts({
+
 							title: {
-								text: $scope.paramSelected
+								text: $scope.paramSelected,
+								x: -20 //center
 							},
-							plotLines: [{
-								value: 0,
-								width: 1,
-								color: '#808080'
+							subtitle: {
+								text: 'For ' + $scope.countrySelected,
+								x: -20
+							},
+							xAxis: {
+								categories: $scope.newSeries
+							},
+							yAxis: {
+								title: {
+									text: $scope.paramSelected
+								},
+								plotLines: [{
+									value: 0,
+									width: 1,
+									color: '#808080'
+								}]
+							},
+							tooltip: {
+								valueSuffix: ' %'
+							},
+							legend: {
+								layout: 'vertical',
+								align: 'right',
+								verticalAlign: 'middle',
+								borderWidth: 0
+							},
+							series: [{
+								name: $scope.countrySelected,
+								data: $scope.newChartData
 							}]
-						},
-						tooltip: {
-							valueSuffix: ' %'
-						},
-						legend: {
-							layout: 'vertical',
-							align: 'right',
-							verticalAlign: 'middle',
-							borderWidth: 0
-						},
-						series: [{
-							name: $scope.countrySelected,
-							data: $scope.newChartData
-						}]
-			});
-			
+				});
+			}
+			else
+			{
+				checker = 1
+				$('#container').highcharts({
+							chart: {
+										type: 'column'
+							},
+							title: {
+								text: $scope.paramSelected,
+								x: -20 //center
+							},
+							subtitle: {
+								text: 'For ' + $scope.countrySelected,
+								x: -20
+							},
+							xAxis: {
+								categories: $scope.newSeries
+							},
+							yAxis: {
+								title: {
+									text: $scope.paramSelected
+								},
+								plotLines: [{
+									value: 0,
+									width: 1,
+									color: '#808080'
+								}]
+							},
+							tooltip: {
+								valueSuffix: ' %'
+							},
+							legend: {
+								layout: 'vertical',
+								align: 'right',
+								verticalAlign: 'middle',
+								borderWidth: 0
+							},
+							series: [{
+								name: $scope.countrySelected,
+								data: $scope.newChartData
+							}]
+				});
+				
+			}
 		}
 	};
 
