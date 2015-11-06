@@ -1,0 +1,28 @@
+<html>
+<head>
+	<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+    <script src="highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="singleCountryVisualization.js"></script>
+   <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-app="dataCtrl" ng-controller="jsonDataCtrl">
+
+
+    <input type="text" ng-model="countrySelected" uib-typeahead="country for country in countries | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Country's Name..">
+	<br>
+
+
+    <input type="text" ng-model="paramSelected" uib-typeahead="param for param in params | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Parameter's Name..">
+	<br>
+    <button class="btn btn-primary" id="lineChart" ng-click="showChart(0)">Line Chart</button>
+	<button class="btn btn-primary" id="barChart" ng-click="showChart(1)">Bar Chart</button>
+
+
+    <div id="container" class="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+
+</body>
+</html>

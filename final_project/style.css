@@ -1,0 +1,36 @@
+        #globalheader {
+            color:#428bca;
+            text-align:center;
+        }
+    
+        body{
+            margin: 45px 100px;
+            background-color: #FFFFFF;
+            font-family:"Lucida Grande";
+            color:#6D6C64;
+            /*font-size:80%;*/
+        }
+        .link {
+            padding:5px;
+        }
+        a:link,a:visited {
+            color:#259CDE;
+        }
+     
+        a.link, a.hover {
+            text-decoration: none;
+        }
+        .defcolor{
+            border: 2px solid;
+            border-color: #4298dd;
+            border-radius: 25px;
+            padding:5px;
+        }
+        .defaultBackground{
+            border: 2px solid;
+            border-color: #259CDE;
+            border-radius: 25px;
+            padding:7px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
