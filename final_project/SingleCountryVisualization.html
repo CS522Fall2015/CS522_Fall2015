@@ -24,7 +24,7 @@
 <body ng-app="dataCtrl" ng-controller="jsonDataCtrl">
 
 
-    <input id="country" type="text" ng-model="countrySelected" uib-typeahead="country for country in countries | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Country's Name..">
+    <input id="country" type="text" ng-model="countrySelected" uib-typeahead="country for country in countries | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Country's Name..">{{countrySelected}}
 	<br>
 	
 	
