@@ -3,8 +3,8 @@ var module = angular.module("dataCtrl", ['ui.bootstrap']);
 
 module.controller("jsonDataCtrl", function($scope, $http) {
 
-	$scope.countrySelected = undefined;
-	$scope.paramSelected = undefined;
+	$scope.countrySelected = null;
+	$scope.paramSelected = null;
 	$scope.countries = [];
 	$scope.params = [];
 	var checker = 0
@@ -98,6 +98,14 @@ module.controller("jsonDataCtrl", function($scope, $http) {
 				
 		}
 		
+		var checker_country = document.getElementById('country');
+		var checker_parameter = document.getElementById('parameter');
+		
+		console.log("checker_country: " + checker_country)
+		console.log("checker_parameter: " + checker_parameter)
+		
+		
+		
 		if( $scope.newSeries.length == 0)
 		{
 			console.log("checker: " + checker)
@@ -105,7 +113,7 @@ module.controller("jsonDataCtrl", function($scope, $http) {
 			{
 				$("#container").empty()
 			}
-			$("#container").append("<br><p id=\"inner\" style=\"font-size:160%\">No Information to Display!</p>")
+			$("#container").append("<br><p id=\"inner\" style=\"font-size:200%\">No Information to Display!</p>")
 			checker = 1
 
 		}

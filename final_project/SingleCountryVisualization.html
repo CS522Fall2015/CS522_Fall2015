@@ -7,20 +7,35 @@
     <script src="highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="singleCountryVisualization.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#country').on('change', function() {
+				$('#parameter').prop('disabled', false)
+			});
+			$('#parameter').on('change', function() {
+				$('#lineChart').prop('disabled', false)
+				$('#barChart').prop('disabled', false)
+				
+			});
+		});
+	</script>
    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body ng-app="dataCtrl" ng-controller="jsonDataCtrl">
 
 
-    <input type="text" ng-model="countrySelected" uib-typeahead="country for country in countries | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Country's Name..">
+    <input id="country" type="text" ng-model="countrySelected" uib-typeahead="country for country in countries | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Country's Name..">
 	<br>
+	
+	
 
-
-    <input type="text" ng-model="paramSelected" uib-typeahead="param for param in params | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Parameter's Name..">
+    <input id="parameter" type="text" ng-model="paramSelected" uib-typeahead="param for param in params | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Parameter's Name.." disabled>
 	<br>
-    <button class="btn btn-primary" id="lineChart" ng-click="showChart(0)">Line Chart</button>
-	<button class="btn btn-primary" id="barChart" ng-click="showChart(1)">Bar Chart</button>
-
+    
+	
+	<button type="button" class="btn btn-primary" id="lineChart" ng-click="showChart(0)" disabled>Line Chart</button>
+	<button type="button" class="btn btn-primary" id="barChart" ng-click="showChart(1)" disabled>Bar Chart</button>
+	
 
     <div id="container" class="container" style="min-width: 310px; height: 400px; margin: 0 auto">
 
