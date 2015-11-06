@@ -9,6 +9,22 @@
 ${demo.css}
 		</style>
 
+<link rel="stylesheet" type="text/css" href="../final_project/style.css">
+
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  
+    <script>
+           $(function() {
+            $(".link").hover(function(){
+                $(this).css("background-color", "#93c4e1"); 
+                $(this).css("border-radius", "25px");
+                $(this).css("color", "#FFFFFF");
+            }, function(){
+                $(this).css("background-color", "#FFFFFF");
+                $(this).css("color", "#428bca");
+            });
+        });
+    </script>
 
 <script type="text/javascript">
 
@@ -62,7 +78,7 @@ $(function () {
                 minSize: 4,
                 maxSize: '12%',
                 tooltip: {
-                    pointFormat: '{point.code}: {point.z} ->thousands'
+                    pointFormat: '{point.code}: {point.z}thousands'
                 }
             }]
         });
@@ -76,7 +92,15 @@ $(function () {
 <script src="highmaps.js"></script>
 <script src="data.js"></script>
 <script src="world.js"></script>
+  <div id="globalheader">
 
+    <h2>World Urban Development Data Visualization</h2>
+      <br>
+        <a class="link defaultBackground" href="../final_project/single.html">Country Analysis </a>&nbsp;&nbsp;&nbsp;
+        <a class="link defaultBackground" href="../final_project/mapBasedVisualization.html">Multi Country Comparison </a>&nbsp;&nbsp;&nbsp;
+        <a class="link defaultBackground" href="../map-bubble/index.html">Map Based Visualization</a>
+
+  </div>
 
 <div id="container" style="height: 500px; min-width: 310px; max-width: 800px; margin: 30px auto"></div>
 
