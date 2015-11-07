@@ -8,6 +8,14 @@ module.controller("jsonDataCtrl", function($scope, $http) {
 	$scope.countries = [];
 	$scope.params = [];
 	var checker = 0
+	
+	  //to make sure that the page loads after the file has been paesed.
+	  $http.get('finalFile.json')
+		.success(function(response)
+		{
+		});
+	
+	
 	jQuery.get('finalFile.json', function(data) {
 		
 			

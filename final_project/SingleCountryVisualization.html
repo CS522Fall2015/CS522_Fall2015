@@ -29,7 +29,7 @@
 	
 	
 
-    <input id="parameter" type="text" ng-model="paramSelected" uib-typeahead="param for param in params | filter:$viewValue" class="form-control" style="width: 20%" placeholder="Start Typing a Parameter's Name.." disabled>
+    <select id="parameter" ng-model="paramSelected" ng-options='param for param in params' value="---- select a parameter ----" disabled>{{paramSelected}}</select>
 	<br>
     
 	
