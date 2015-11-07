@@ -1,0 +1,55 @@
+<html>
+<head>
+    <link rel="stylesheet" href="bootstrap-combined.min.css">
+	<link href="bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+    <script src="highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="MultiCountryVisualization.js"></script>
+    <script src="underscore-min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#multiselect').on('change', function() {
+                $('#parameter').prop('disabled', false)
+            });
+            $('#parameter').on('change', function() {
+                $('#stackedBarChart').prop('disabled', false)
+                $('#lineChart').prop('disabled', false)
+                $('#scatterPlot').prop('disabled', false)
+                
+            });
+        });
+    </script>
+	
+	<script>
+		
+	</script>
+
+</head>
+<body ng-app="myApp" ng-controller="MyCtrl">
+   <br>
+   <div >
+  
+		<select class="multiselect" id="multiselect"
+					ng-model="countrySelected" ng-options="country for country in countries"
+					multiple="multiple" multiselect-dropdown style="height: 100px"></select>
+
+		<p>Selection: {{countrySelected}}</p>
+	</div>
+
+	<select id="parameter" ng-model="paramSelected" ng-options='param for param in params' value="---- select a parameter ----" disabled>{{paramSelected}}</select>
+	<br>
+	<br>
+	<button id="stackedBarChart" type="button" class="btn btn-primary" id="lineChart" ng-click="showChart(0)" disabled>Stacked Bar Chart</button>
+	<button id="lineChart" type="button" class="btn btn-primary" id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>
+	<button id="scatterPlot" type="button" class="btn btn-primary" id="lineChart" ng-click="showChart(2)" disabled>Scatter Plot</button>
+	<br>
+
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</body>
+</html>
