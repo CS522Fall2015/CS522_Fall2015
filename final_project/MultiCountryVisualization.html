@@ -1,7 +1,6 @@
 <html>
 <head>
     <link rel="stylesheet" href="bootstrap-combined.min.css">
-	<link href="bootstrap.css" rel="stylesheet">
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
@@ -41,8 +40,7 @@
 		<p>Selection: {{countrySelected}}</p>
 	</div>
 
-	<select id="parameter" ng-model="paramSelected" ng-options='param for param in params' value="---- select a parameter ----" disabled>{{paramSelected}}</select>
-	<br>
+	<select id="parameter" ng-model="paramSelected" ng-options='param for param in params' disabled>{{paramSelected}}</select>
 	<br>
 	<button id="stackedBarChart" type="button" class="btn btn-primary" id="lineChart" ng-click="showChart(0)" disabled>Stacked Bar Chart</button>
 	<button id="lineChart" type="button" class="btn btn-primary" id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>

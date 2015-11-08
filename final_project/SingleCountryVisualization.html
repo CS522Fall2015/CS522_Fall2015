@@ -1,5 +1,6 @@
 <html>
 <head>
+	<link rel="stylesheet" href="bootstrap-combined.min.css">
 	<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
@@ -19,7 +20,7 @@
 			});
 		});
 	</script>
-   <link href="bootstrap.css" rel="stylesheet">
+
 </head>
 <body ng-app="dataCtrl" ng-controller="jsonDataCtrl">
 
@@ -29,7 +30,7 @@
 	
 	
 
-    <select id="parameter" ng-model="paramSelected" ng-options='param for param in params' disabled>{{paramSelected}}</select>
+    <select id="parameter" ng-model="paramSelected" ng-options='param for param in params' disabled></select>
 	<br>
     
 	
