@@ -168,7 +168,8 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 {
 			 $('#container').highcharts({
 					chart: {
-						type: 'column'
+						type: 'column',
+						zoomType: 'xy'
 					},
 					title: {
 						text: 'Multi-Country Comparison',
@@ -179,7 +180,11 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						x: -20
 					},
 					xAxis: {
-						categories: $scope.seriesCategories
+						categories: $scope.seriesCategories,
+						title: {
+									//text: null
+								},
+						min: 0
 					},
 					yAxis: {
 						title: {
@@ -189,7 +194,8 @@ myApp.controller('MyCtrl', function($scope, $http) {
 							value: 0,
 							width: 1,
 							color: '#808080'
-						}]
+						}],
+						min: 0
 					},
 					tooltip: {
 						formatter: function() {
@@ -226,6 +232,9 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 else if(number == 1)
 		 {
 			 $('#container').highcharts({
+					chart: {
+						zoomType: 'xy'
+					},
 					title: {
 						text: 'Test1 graph',
 						x: -20 //center
@@ -235,7 +244,11 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						x: -20
 					},
 					xAxis: {
-						categories: $scope.seriesCategories
+						categories: $scope.seriesCategories,
+						title: {
+									//text: null
+						},
+						min: 0
 					},
 					yAxis: {
 						title: {
@@ -245,7 +258,8 @@ myApp.controller('MyCtrl', function($scope, $http) {
 							value: 0,
 							width: 1,
 							color: '#808080'
-						}]
+						}],
+						min: 0
 					},
 					tooltip: {
 						formatter: function() {
@@ -365,8 +379,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 		
 			
 	 	$scope.jsonData_single = data;
-		//console.log( $scope.jsonData_single)
-	 	//var arr = JSON.parse(data);
+
 	 	data[0]["ParamData"].forEach(function(item)
 	 	{
 	 		$scope.params_single.push(item["Indicator Name"]);
@@ -374,7 +387,6 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 
 	 	});
 
-		//console.log("$scope.params_single: " + $scope.params_single)
 		
 	 	data.forEach(function(item)
 	 	{
@@ -382,7 +394,6 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 
 	 	});
 		
-		//console.log("$scope.countries_single: " + $scope.countries_single)
 		
 	 });
 	
@@ -392,8 +403,8 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 		$scope.chartData_single = [];
 
 		$scope.jsonData_single.forEach(function(item) {
-			console.log(item["Country Name"])
-			if(item["Country Name"] == $scope.countrySelected_single)
+
+		if(item["Country Name"] == $scope.countrySelected_single)
 			{
 				$scope.countryData_single = item;
 			}
@@ -407,11 +418,9 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 			}
 		});
 
-		console.log($scope.paramData_single)
 		for(key in $scope.paramData_single) {
 		    if($scope.paramData_single.hasOwnProperty(key)) {
 				
-				//console.log("$scope.paramData_single[key]: " + $scope.paramData_single)
 				
 				if($scope.paramData_single[key] == null)
 						$scope.chartData_single.push(0);
@@ -454,14 +463,9 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 		var checker_single_country = document.getElementById('country');
 		var checker_single_parameter = document.getElementById('parameter');
 		
-		console.log("checker_single_country: " + checker_single_country)
-		console.log("checker_single_parameter: " + checker_single_parameter)
-		
-		
 		
 		if( $scope.newSeries_single.length == 0)
 		{
-			console.log("checker_single: " + checker_single)
 			if(checker_single == 1)
 			{
 				$("#container_single").empty()
@@ -476,7 +480,9 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 			{
 				checker_single = 1
 				$('#container_single').highcharts({
-
+							chart: {
+									zoomType: 'xy'
+							},
 							title: {
 								text: $scope.paramSelected_single,
 								x: -20 //center
@@ -486,7 +492,11 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 								x: -20
 							},
 							xAxis: {
-								categories: $scope.newSeries_single
+								categories: $scope.newSeries_single,
+								title: {
+									//text: null
+								},
+								min: 0
 							},
 							yAxis: {
 								title: {
@@ -496,7 +506,8 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 									value: 0,
 									width: 1,
 									color: '#808080'
-								}]
+								}],
+								min: 0
 							},
 							tooltip: {
 								valueSuffix: ' %'
@@ -518,7 +529,8 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 				checker_single = 1
 				$('#container_single').highcharts({
 							chart: {
-										type: 'column'
+										type: 'column',
+										zoomType: 'xy'
 							},
 							title: {
 								text: $scope.paramSelected_single,
@@ -529,7 +541,11 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 								x: -20
 							},
 							xAxis: {
-								categories: $scope.newSeries_single
+								categories: $scope.newSeries_single,
+								title: {
+									//text: null
+								},
+								min: 0
 							},
 							yAxis: {
 								title: {
@@ -539,7 +555,8 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 									value: 0,
 									width: 1,
 									color: '#808080'
-								}]
+								}],
+								min: 0
 							},
 							tooltip: {
 								valueSuffix: ' %'
