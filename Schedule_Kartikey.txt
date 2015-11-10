@@ -16,4 +16,6 @@ Add zoom in feature on graphs                           2 hours                 
 Add detail on demand feature(select and deselect item   3 hours					11/08		    Met
 on plots)
 
+Design logo and tagline					1 hour					11/08		    Met
+
 Create Bubble Map plot					7 hours					11/15		Under Process
