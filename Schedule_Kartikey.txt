@@ -1,19 +1,19 @@
---------------------------------------------------------------------------------------------------------
-Task Name						Estimated Duration		Completion Date
----------------------------------------------------------------------------------------------------------
-CSV to JSON converter					3 hours					10/25
+--------------------------------------------------------------------------------------------------------------------------------
+Task Name						Estimated Duration		Completion Date		Targets Status
+--------------------------------------------------------------------------------------------------------------------------------
+CSV to JSON converter					3 hours					10/25		    Met
 
-create plot for line chart				4 hours					11/29
+create plot for line chart				4 hours					11/29		    Met
 	
-create plot for histogram			 	5 hours					11/03
+create plot for histogram			 	5 hours					11/03		    Met
 
-add button and hover functionality 			2 hours					11/05
+add button and hover functionality 			2 hours					11/05		    Met
 
-Create plots for multi country visualization            5 hours					11/07
+Create plots for multi country visualization            5 hours					11/07		    Met
 
-Add zoom in feature on graphs                           2 hours                                 11/08
+Add zoom in feature on graphs                           2 hours                                 11/08		    Met
 
-Add detail on demand feature(select and deselect item   3 hours					11/08
+Add detail on demand feature(select and deselect item   3 hours					11/08		    Met
 on plots)
 
-Create Bubble Map plot					7 hours					11/15
+Create Bubble Map plot					7 hours					11/15		Under Process
