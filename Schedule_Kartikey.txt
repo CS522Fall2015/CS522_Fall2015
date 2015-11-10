@@ -8,3 +8,12 @@ create plot for line chart				4 hours					11/29
 create plot for histogram			 	5 hours					11/03
 
 add button and hover functionality 			2 hours					11/05
+
+Create plots for multi country visualization            5 hours					11/07
+
+Add zoom in feature on graphs                           2 hours                                 11/08
+
+Add detail on demand feature(select and deselect item   3 hours					11/08
+on plots)
+
+Create Bubble Map plot					7 hours					11/15
