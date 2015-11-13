@@ -167,6 +167,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 if(number == 0)
 		 {
 			 $('#container').highcharts({
+					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 					chart: {
 						type: 'column',
 						zoomType: 'xy'
@@ -208,7 +209,6 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						x: -30,
 						verticalAlign: 'top',
 						y: 25,
-						//floating: true,
 						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 						borderColor: '#CCC',
 						borderWidth: 1,
@@ -232,6 +232,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 else if(number == 1)
 		 {
 			 $('#container').highcharts({
+					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 					chart: {
 						zoomType: 'xy'
 					},
@@ -296,6 +297,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 else if(number == 2)
 		 {
 			$('#container').highcharts({
+					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 					chart: {
 						type: 'scatter',
 						zoomType: 'xy'
@@ -403,13 +405,17 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 		$scope.chartData_single = [];
 
 		$scope.jsonData_single.forEach(function(item) {
-
+		
+		var checker = 0;
+		
 		if(item["Country Name"] == $scope.countrySelected_single)
 			{
+				checker = 1;
 				$scope.countryData_single = item;
 			}
+		
 		});
-
+		
 		$scope.countryData_single["ParamData"].forEach(function(item) {
 
 			if(item["Indicator Name"] == $scope.paramSelected_single)
@@ -463,116 +469,123 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 		var checker_single_country = document.getElementById('country');
 		var checker_single_parameter = document.getElementById('parameter');
 		
-		
-		if( $scope.newSeries_single.length == 0)
+		if($scope.countrySelected_single === '')
 		{
-			if(checker_single == 1)
-			{
 				$("#container_single").empty()
-			}
-			$("#container_single").append("<br><p id=\"inner\" style=\"font-size:200%\">No Information to Display!</p>")
-			checker_single = 1
-
+				$("#container_single").append("<br><p id=\"inner\" style=\"font-size:200%\">No Information to Display!</p>")
 		}
 		else
-		{
-			if(number == 0)
+		{			
+			if( $scope.newSeries_single.length == 0)
 			{
+				if(checker_single == 1)
+				{
+					$("#container_single").empty()
+				}
+				$("#container_single").append("<br><p id=\"inner\" style=\"font-size:200%\">No Information to Display!</p>")
 				checker_single = 1
-				$('#container_single').highcharts({
-							chart: {
-									zoomType: 'xy'
-							},
-							title: {
-								text: $scope.paramSelected_single,
-								x: -20 //center
-							},
-							subtitle: {
-								text: 'For ' + $scope.countrySelected_single,
-								x: -20
-							},
-							xAxis: {
-								categories: $scope.newSeries_single,
-								title: {
-									//text: null
-								},
-								min: 0
-							},
-							yAxis: {
-								title: {
-									text: $scope.paramSelected_single
-								},
-								plotLines: [{
-									value: 0,
-									width: 1,
-									color: '#808080'
-								}],
-								min: 0
-							},
-							tooltip: {
-								valueSuffix: ' %'
-							},
-							legend: {
-								layout: 'vertical',
-								align: 'right',
-								verticalAlign: 'middle',
-								borderWidth: 0
-							},
-							series: [{
-								name: $scope.countrySelected_single,
-								data: $scope.newChartData_single
-							}]
-				});
+				
 			}
 			else
 			{
-				checker_single = 1
-				$('#container_single').highcharts({
-							chart: {
-										type: 'column',
+				if(number == 0)
+				{
+					checker_single = 1
+					$('#container_single').highcharts({
+								chart: {
 										zoomType: 'xy'
-							},
-							title: {
-								text: $scope.paramSelected_single,
-								x: -20 //center
-							},
-							subtitle: {
-								text: 'For ' + $scope.countrySelected_single,
-								x: -20
-							},
-							xAxis: {
-								categories: $scope.newSeries_single,
-								title: {
-									//text: null
 								},
-								min: 0
-							},
-							yAxis: {
 								title: {
-									text: $scope.paramSelected_single
+									text: $scope.paramSelected_single,
+									x: -20 //center
 								},
-								plotLines: [{
-									value: 0,
-									width: 1,
-									color: '#808080'
-								}],
-								min: 0
-							},
-							tooltip: {
-								valueSuffix: ' %'
-							},
-							legend: {
-								layout: 'vertical',
-								align: 'right',
-								verticalAlign: 'middle',
-								borderWidth: 0
-							},
-							series: [{
-								name: $scope.countrySelected_single,
-								data: $scope.newChartData_single
-							}]
-				});
-				
+								subtitle: {
+									text: 'For ' + $scope.countrySelected_single,
+									x: -20
+								},
+								xAxis: {
+									categories: $scope.newSeries_single,
+									title: {
+										//text: null
+									},
+									min: 0
+								},
+								yAxis: {
+									title: {
+										text: $scope.paramSelected_single
+									},
+									plotLines: [{
+										value: 0,
+										width: 1,
+										color: '#808080'
+									}],
+									min: 0
+								},
+								tooltip: {
+									valueSuffix: ' %'
+								},
+								legend: {
+									layout: 'vertical',
+									align: 'right',
+									verticalAlign: 'middle',
+									borderWidth: 0
+								},
+								series: [{
+									name: $scope.countrySelected_single,
+									data: $scope.newChartData_single
+								}]
+					});
+				}
+				else
+				{
+					checker_single = 1
+					$('#container_single').highcharts({
+								chart: {
+											type: 'column',
+											zoomType: 'xy'
+								},
+								title: {
+									text: $scope.paramSelected_single,
+									x: -20 //center
+								},
+								subtitle: {
+									text: 'For ' + $scope.countrySelected_single,
+									x: -20
+								},
+								xAxis: {
+									categories: $scope.newSeries_single,
+									title: {
+										//text: null
+									},
+									min: 0
+								},
+								yAxis: {
+									title: {
+										text: $scope.paramSelected_single
+									},
+									plotLines: [{
+										value: 0,
+										width: 1,
+										color: '#808080'
+									}],
+									min: 0
+								},
+								tooltip: {
+									valueSuffix: ' %'
+								},
+								legend: {
+									layout: 'vertical',
+									align: 'right',
+									verticalAlign: 'middle',
+									borderWidth: 0
+								},
+								series: [{
+									name: $scope.countrySelected_single,
+									data: $scope.newChartData_single
+								}]
+					});
+					
+				}
 			}
 		}
 	};
