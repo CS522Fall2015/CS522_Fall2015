@@ -205,10 +205,10 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						}
 					},
 					legend: {
-						align: 'right',
-						x: -30,
-						verticalAlign: 'top',
-						y: 25,
+						//align: 'right',
+						x: 0,
+						//verticalAlign: 'top',
+						y: 0,
 						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 						borderColor: '#CCC',
 						borderWidth: 1,
@@ -269,10 +269,10 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						}
 					},
 					legend: {
-						align: 'right',
-						x: -30,
-						verticalAlign: 'top',
-						y: 25,
+						//align: 'right',
+						x: 0,
+						//verticalAlign: 'top',
+						y: 0,
 						//floating: true,
 						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 						borderColor: '#CCC',
@@ -330,10 +330,10 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						}
 					},
 					legend: {
-						align: 'right',
-						x: -30,
-						verticalAlign: 'top',
-						y: 25,
+						//align: 'right',
+						x: 0,
+						//verticalAlign: 'top',
+						y: 0,
 						//floating: true,
 						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 						borderColor: '#CCC',
@@ -526,9 +526,11 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 								},
 								legend: {
 									layout: 'vertical',
-									align: 'right',
-									verticalAlign: 'middle',
-									borderWidth: 0
+									//align: 'right',
+									//verticalAlign: 'middle',
+									borderWidth: 0,
+									x: 0,
+									y: 0
 								},
 								series: [{
 									name: $scope.countrySelected_single,
@@ -575,9 +577,11 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 								},
 								legend: {
 									layout: 'vertical',
-									align: 'right',
-									verticalAlign: 'middle',
-									borderWidth: 0
+									//align: 'right',
+									//verticalAlign: 'middle',
+									borderWidth: 0,
+									x: 0,
+									y: 0
 								},
 								series: [{
 									name: $scope.countrySelected_single,
