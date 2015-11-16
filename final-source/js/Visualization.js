@@ -472,7 +472,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 		if($scope.countrySelected_single === '')
 		{
 				$("#container_single").empty()
-				$("#container_single").append("<br><p id=\"inner\" style=\"font-size:200%\">No Information to Display!</p>")
+				$("#container_single").append("<br><p id=\"inner\" style=\"font-size:200%\">Please select a country!</p>")
 		}
 		else
 		{			
