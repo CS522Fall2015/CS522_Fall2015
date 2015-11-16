@@ -57,7 +57,7 @@
 
 });
 	//end of single country operations
-
+	
 });
 </script>
 
@@ -145,7 +145,8 @@ font-family: Abel;
               <button type="button" class="btn btn-primary btn-spacing" id="lineChart_single" ng-click="showChart_single(0)" disabled>Line Chart</button>
               <button type="button" class="btn btn-primary btn-spacing" id="barChart_single" ng-click="showChart_single(1)" disabled>Bar Chart</button>
             </div>
-           <div id="container_single" class="container" style="min-width: 310px; height: 400px; margin: 55 auto"></div>
+           <div id="container_single" class="container" style="min-width: 260px; height: 360px; margin: 50 auto"></div>
+		   <center id="zoomable">The graph is zoomable. Select the area to be zoomed in by click and drag of the mouse.</center>
          </div>
 
          <!-- Multi-Country Comparison --> 
@@ -168,6 +169,7 @@ font-family: Abel;
           </div>
           <center>
             <div id="container" style="min-width: 260px; height: 360px; margin: 50 auto"></div>
+			<p id="zoomable">The graph is zoomable. Select the area to be zoomed in by click and drag of the mouse.</p>
           </center>
 
         </div>
@@ -183,6 +185,7 @@ font-family: Abel;
 	   <!-- Motion Visualization -->
         <div class="bhoechie-tab-content">
          <center>
+			<center>Motion Chart</center>
 			<div id="chart_div" style="width: 600px; height: 300px;">
 				<script type="text/javascript">
 					motionChart();
