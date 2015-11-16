@@ -7,6 +7,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <!-- End of Css/js files for vertical tab-->
 
   <!-- JS files for single/multi country visualizations-->
@@ -18,6 +19,7 @@
   <script src="http://code.highcharts.com/modules/exporting.js"></script>
   <script src="js/Visualization.js"></script>
   <script src="js/underscore-min.js"></script>
+  <script src="js/motionChart.js"></script>
   <!-- End of JS files for single/multi country visualizations-->
 
 
@@ -89,7 +91,9 @@ font-family: Abel;
             <a href="#" class="list-group-item text-center">
               <h4 class="glyphicon glyphicon-globe"></h4><br/>Map Based Visualization
             </a>
-  
+			<a href="#" class="list-group-item text-center">
+              <h4 class="glyphicon glyphicon-th-large"></h4><br/>Motion Visualization
+            </a>
           </div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
@@ -175,7 +179,18 @@ font-family: Abel;
           <h2 style="margin-top: 0;color:#55518a"> Maps Cooming Soon</h2>
         <center>
        </div>
-
+	   
+	   <!-- Motion Visualization -->
+        <div class="bhoechie-tab-content">
+         <center>
+			<div id="chart_div" style="width: 600px; height: 300px;">
+				<script type="text/javascript">
+					motionChart();
+				</script>
+			</div>
+        <center>
+       </div>
+	   
     </div>
   </div>
 </div>
