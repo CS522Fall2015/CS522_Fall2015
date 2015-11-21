@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highmaps Example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+ <style>
+ body {
+  font-family: Signika Negative, sans-serif;
+  font-weight: 300;
+  color: white;
+  background-color: black;
+  text-align: center;
+}
+#demo {
+  text-align: center;
+  margin-top:20px;
+}
+#bg {
+      background-color:#000;
+  position:relative;
+      overflow:hidden;
+  display:inline-block;
+      width:500px;
+      height:70px;
+      border-radius: 8px;
+      border: 2px solid #777;
+}   
+#text {
+    position:absolute;
+    text-align:center;
+    width:500px;
+    height:70px;
+      line-height:68px;
+  font-size: 28px;
+}       
+#text span {
+      -webkit-font-smoothing: antialiased;
+      -moz-font-smoothing:antialiased;
+    position:relative;
+      display:inline-block;
+      color:#FFF;
+}    
+#slider {
+  display: inline-block;
+      width: 500px;
+      height:12px;
+      margin:8px 0px 8px 6px;   
+}
+#controls button {
+  width: 80px;
+}
+#controls input {
+      display:inline;
+      padding:2px;
+      margin:2px;
+}
+ </style>
+  
+<script type="text/javascript">
+
+$(function () {
+
+    $.getJSON('population_data.js', function (data) {
+
+        var mapData = Highcharts.geojson(Highcharts.maps['custom/world']);
+
+        $.each(data, function () {
+            if (this.code === 'UK') {
+                this.code = 'GB';
+            }
+        });
+
+        $('#container').highcharts('Map', {
+            chart : {
+                borderWidth : 1
+            },
+
+            title: {
+                text: 'World population Map View'
+            },
+
+            subtitle : {
+                text : 'Sample Data for Population in 2013'
+            },
+
+            legend: {
+                enabled: false
+            },
+
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
+             credits: {
+                enabled: false
+            },
+
+            series : [{
+                name: 'Countries',
+                mapData: mapData,
+                color: '#E0E0E0',
+                enableMouseTracking: false
+            }, {
+                type: 'mapbubble',
+                mapData: mapData,
+                name: 'Population 2013',
+                joinBy: ['iso-a3', 'code'],
+                data: data,
+                minSize: 4,
+                maxSize: '12%',
+                tooltip: {
+                    pointFormat: '{point.code}: {point.z}thousands -[{point.a[new1]}]- [{point.b}] [{point.c}]'
+                }
+            }]
+        });
+
+    });
+});
+var $text = $("#text"),
+    $pause = $("#pause"),
+    $reverse = $("#reverse"),
+    $restart = $("#restart"),
+    $speed = $("input[name='speed']"),
+    $slider = $("#slider"),
+    //"tl" is the timeline we'll add our tweens to. Then we can easily control the whole sequence as one object. 
+    tl = new TimelineLite({onUpdate:updateSlider, onComplete:onComplete, onReverseComplete:onComplete, paused:true});
+
+function updateSlider() {
+  $slider.slider("value", tl.progress() * 100);
+}
+function onComplete() {
+  tl.pause();
+  $pause.html("play");
+}
+
+//do a simple split of the text so we can animate each character (doesn't require the advanced features of SplitText, so we just use split() and join())
+$text.html("<span>" + $text.html().split("").join("</span><span>").split("<span> </span>").join("<span>&nbsp;</span>") + "</span>");
+
+//set a perspective on the container
+TweenLite.set($text, {perspective:500});
+
+//all of the animation is created in this one line:
+tl.staggerTo($("#text span"), 4, {transformOrigin:"50% 50% -30px", rotationY:-360, rotationX:360, rotation:360, ease:Elastic.easeInOut}, 0.02);
+
+//slider and button controls from here on...
+var isPaused;
+
+$slider.slider({
+  range: false,
+  min: 0,
+  max: 100,
+  step:.1,
+  slide: function (event, ui) {
+    tl.progress( ui.value / 100 ).pause();
+    if (isPaused) $pause.html("resume");
+  },
+  start: function (event, ui) {
+    isPaused = tl.paused();
+  },
+  stop: function (event, ui) {
+    if (!isPaused) tl.resume();
+  }
+});
+
+$pause.click(function() {
+  if (tl.paused()) {
+    if (tl.progress() === 1 || (tl.progress() === 0 && tl.reversed())) {
+      tl.restart();
+    } else {
+      tl.resume();
+    }
+    $pause.html("pause");
+  } else {
+    tl.pause();
+    $pause.html("resume");
+  }
+});
+
+$reverse.click(function() {
+  if (tl.progress() === 0) {
+    if (tl.reversed()) {
+      tl.play();
+    } else {
+      tl.reverse(0);
+    }
+    $pause.html("pause");
+  } else {
+    tl.reversed(!tl.reversed()).resume();
+    $pause.html("pause");
+  }
+});
+
+$restart.click(function(){
+  tl.restart();
+  $pause.html("pause");
+});
+
+$speed.change(function(v, val) {
+  tl.timeScale(parseFloat($(this).val()));
+  if (tl.progress() === 1) {
+    tl.restart();
+    $pause.html("pause");
+  } else if (tl.paused()) {
+    tl.resume();
+    $pause.html("pause");
+  }
+});
+</script>
+	</head>
+	<body>
+<script src="highmaps.js"></script>
+<script src="data.js"></script>
+<script src="world.js"></script>
+
+<div id="container" style="height: 500px; min-width: 310px; max-width: 800px; margin: 30px auto"></div>
+<link href='//fonts.googleapis.com/css?family=Signika+Negative:300' rel='stylesheet' type='text/css'>
+<div id="demo">
+  <div id="bg">
+    <div id="text"></div>
+  </div>
+</div>
+<div id="slider"></div>
+<div id="controls">
+  <button id="pause">play</button>
+  <button id="reverse">reverse</button>
+  <button id="restart">restart</button>
+  <div>Speed: 
+    <label><input type="radio" name="speed" value="0.25" id="slow"> slow</label>
+    <label><input type="radio" name="speed" value="1" id="normal" checked> normal</label>
+    <label><input type="radio" name="speed" value="2" id="fast"> fast</label>
+  </div>
+</div>
+	</body>
+</html>
