@@ -18,6 +18,11 @@ on plots)
 
 Design logo and tagline					1 hour					11/08		    Met
 
-Create Map plot						9 hours					11/19		    Met
+Create Play/Pause button				3 hours					11/18		    Met
+
+Create Map plot	with linking				9 hours					11/19		    Met
 
 Create Motion chart					10 hours				11/16		    Met
+
+Create Play/Pause functionality on Map plot		3 hours					11/25		 In Progress
+(Brushing)
