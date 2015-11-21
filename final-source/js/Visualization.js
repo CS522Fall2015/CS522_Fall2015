@@ -166,6 +166,10 @@ myApp.controller('MyCtrl', function($scope, $http) {
 			}		 
 		 if(number == 0)
 		 {
+		 	alert("check0");
+		 	$("#stackedBarChart").addClass('activeGraph');
+		 	$("#lineChart").removeClass('activeGraph');
+		 	$("#scatterPlot").removeClass('activeGraph');
 			 $('#container').highcharts({
 					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 					chart: {
@@ -231,6 +235,11 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 }
 		 else if(number == 1)
 		 {
+		 	alert("check1");
+
+		 	$("#stackedBarChart").removeClass('activeGraph');
+		 	$("#lineChart").addClass('activeGraph');
+		 	$("#scatterPlot").removeClass('activeGraph');
 			 $('#container').highcharts({
 					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 					chart: {
@@ -296,6 +305,11 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 }
 		 else if(number == 2)
 		 {
+		 	alert("check2");
+
+		 	$("#stackedBarChart").removeClass('activeGraph');
+		 	$("#lineChart").removeClass('activeGraph');
+		 	$("#scatterPlot").addClass('activeGraph');
 			$('#container').highcharts({
 					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 					chart: {
@@ -490,6 +504,9 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 			{
 				if(number == 0)
 				{
+					alert("single1");
+					$("#lineChart_single").addClass('activeGraph');
+	 				$("#barChart_single").removeClass('activeGraph');
 					checker_single = 1
 					$('#container_single').highcharts({
 								chart: {
@@ -540,6 +557,9 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 				}
 				else
 				{
+					alert("single 2");
+					$("#lineChart_single").removeClass('activeGraph');
+	 				$("#barChart_single").addClass('activeGraph');
 					checker_single = 1
 					$('#container_single').highcharts({
 								chart: {
