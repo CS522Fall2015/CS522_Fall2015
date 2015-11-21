@@ -8,3 +8,21 @@ Create Layout for dashboard				4 hours					11/02
 Convert csv to readable json for map 			4 hours					11/01
 
 Create Sample Bubble Map Interface			2 hours					11/05
+
+Correct Bootstrap CSS pages				7 hours					11/13
+
+Create Layout for Map visualization			4 hours					11/17
+
+Design Map rich text interface 				4 hours					11/17
+
+Update log and tagline					1 hour					11/17
+
+JSON parser for bubble map interface			3 hours					11/19
+
+Feedback/clarity/consistency updates			4 hours					11/19
+
+New tabs for motion chart and map interface		4 hours					11/20
+
+
+
+
