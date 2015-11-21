@@ -20,9 +20,14 @@
   <script src="js/Visualization.js"></script>
   <script src="js/underscore-min.js"></script>
   <script src="js/motionChart.js"></script>
+  <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+  <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
   <!-- End of JS files for single/multi country visualizations-->
 
-
+  <!-- JS files for single/multi country visualizations-->
+  <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+  <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>  
+  
   <script type="text/javascript">
   $(document).ready(function() {
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
@@ -175,10 +180,22 @@ font-family: Abel;
         </div>
 
         <!-- Map based visualization -->
-        <div class="bhoechie-tab-content">
+        <div class="bhoechie-tab-content" ng-controller="jsonMapCtrl">
          <center>
-          <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
-          <h2 style="margin-top: 0;color:#55518a"> Maps Cooming Soon</h2>
+          <div id="wrapper">
+			<select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'></select>
+			<select id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'>	
+			</select>
+
+			<br>
+			<div id="container_map"></div>
+			<div id="info">
+				<span class="f32"><span id="flag"></span></span>
+				<h2></h2>
+				<div id='subheader' class="subheader"></div>
+				<div id="country-chart"></div>
+			</div>
+		</div>
         <center>
        </div>
 	   
