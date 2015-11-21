@@ -314,6 +314,9 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						text: $scope.paramSelected,
 						x: -20
 					},
+				   	credits:{
+				            	enabled:false
+				            },
 					xAxis: {
 						categories: $scope.seriesCategories
 					},
