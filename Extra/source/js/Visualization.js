@@ -500,6 +500,9 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 								text: 'For ' + $scope.countrySelected_single,
 								x: -20
 							},
+							 credits:{
+						            	enabled:false
+						            },
 							xAxis: {
 								categories: $scope.newSeries_single,
 								title: {
