@@ -1,61 +1,5 @@
 var myApp = angular.module('myApp',['ui.bootstrap']);
 
-<<<<<<< HEAD
-
-myApp.directive('multiselectDropdown', [function() {
-    return function(scope, jQueryElement, attributes) {
-        
-        jQueryElement = $(jQueryElement[0]); // Get the jQueryElement as a jQuery jQueryElement
-       
-        // Below setup the dropdown:
-        
-        jQueryElement.multiselect({
-            buttonClass : 'btn btn-small',
-            buttonWidth : '300px',
-            buttonContainer : '<div class="btn-group" />',
-            maxHeight : 400,
-            enableFiltering : true,
-            enableCaseInsensitiveFiltering: true,
-            buttonText : function(options) {
-                if (options.length == 0) {
-                    return jQueryElement.data()['placeholder'] + ' <b class="caret"></b>';
-                } else if (options.length > 1) {
-                    return _.first(options).text 
-                    + ' + ' + (options.length - 1)
-                    + ' more selected <b class="caret"></b>';
-                } else {
-                    return _.first(options).text
-                    + ' <b class="caret"></b>';
-                }
-            },
-            // Replicate the native functionality on the jQueryElements so
-            // that angular can handle the changes for us.
-            onChange: function (optionjQueryElement, checked) {
-                optionjQueryElement.removeAttr('selected');
-                if (checked) {
-                    optionjQueryElement.attr('selected', 'selected');
-                }
-                jQueryElement.change();
-            }
-            
-        });
-        // Watch for any changes to the length of our select jQueryElement
-        scope.$watch(function () {
-
-            return jQueryElement[0].length;
-        }, function () {
-            jQueryElement.multiselect('rebuild');
-        });
-        
-        // Watch for any changes from outside the directive and refresh
-        scope.$watch(attributes.ngModel, function () {
-            jQueryElement.multiselect('refresh');
-        });
-    }
-}]);
-
-=======
->>>>>>> origin/master
 myApp.controller('MyCtrl', function($scope, $http) {
 
   $scope.countrySelected = [];
@@ -251,7 +195,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						zoomType: 'xy'
 					},
 					title: {
-						text: 'Test1 graph',
+						text: 'Multi-Country Comparison',
 						x: -20 //center
 					},
 					subtitle: {
@@ -322,7 +266,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						zoomType: 'xy'
 					},
 					title: {
-						text: 'Test1 graph',
+						text: 'Multi-Country Comparison',
 						x: -20 //center
 					},
 					subtitle: {
@@ -677,7 +621,10 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 	 
 	 $scope.createData = function(){
 		 
-		 
+		$('#info #flag').attr('class', '');
+		$('#info h2').html('');
+		$('#country-chart').empty();
+ 
 		 $scope.points = null;
 		 var populateData = "[\n"
 		 $scope.jsonData.forEach(function(data){
@@ -774,7 +721,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
                     $('#info h2').html('Multi-Country Comparison');
 
                 }
-                $('#info .subheader').html('<small><em>Shift + Click on map to compare countries</em></small>');
+                $('#info .subheader').html('<span class="subheading"><small><em>Shift + Click on map to compare countries</em></small></span>');
 
 				for(var i =0; i < $scope.points.length; i++)
 				{
@@ -847,27 +794,29 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 				$('#country-chart').highcharts({
 						colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 						chart:{
+							height: 250,
+                            spacingLeft: 0,
 							zoomType: 'xy'
 						},
 						title: {
-							text: $scope.paramSelected,
-							//text:"",
-							x: -20 //center
+							//text: $scope.paramSelected,
+							text:"",
+							//x: -20 
 						},
-						// subtitle: {
-						// 	text: $scope.paramSelected,
-						// 	x: -20
-						// },
 						xAxis: {
-							categories: $scope.seriesCategories,
-							title: {
-										text: null
-									},
-									min: 0
-						},
+                            tickPixelInterval: 50,
+                            crosshair: true
+                        },
 						yAxis: {
+							
 							title: {
-								text: $scope.paramSelected
+								text: $scope.paramSelected,
+								style:{
+											width:'200px',
+											opposite: true,
+											padding:'50px'
+								},
+								step: 4
 							},
 							plotLines: [{
 								value: 0,
@@ -876,24 +825,18 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 							}]
 						},
 						tooltip: {
-							formatter: function() {
-									return '<b>'+ this.series.name +'</b><br/>'+
-									this.x +': '+ this.y;
-							}
+							shared:true
 						},
 						legend: {
-							//align: 'right',
 							x: 0,
-							//verticalAlign: 'top',
 							y: 0,
-							//floating: true,
 							backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 							borderColor: '#CCC',
 							borderWidth: 1,
 							shadow: true
 						},
 						 plotOptions: {
-							column: {
+							line: {
 								stacking: 'normal',
 								dataLabels: {
 									enabled: false,
@@ -901,7 +844,12 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 									style: {
 										textShadow: '0 0 3px black'
 									}
-								}
+									
+								},
+								marker: {
+										enabled: false
+									}
+							
 							}
 						},
 						series: $scope.seriesData
@@ -922,7 +870,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
         mapChart = $('#container_map').highcharts('Map', {
 			color: ['#e0f3db', '#a8ddb5', '#43a2ca'],
             title : {
-                text : $scope.yearSelected +" " + $scope.paramSelected
+                text : $scope.yearSelected +": " + $scope.paramSelected
             },
 
             // subtitle: {
@@ -975,7 +923,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
             }]
         }).highcharts();
 
-		$("#container_map").addClass('mapBorder');
+		// $("#container_map").addClass('mapBorder');
 
 		if($scope.paramSelected != null && $scope.yearSelected != null) 
 			$('#info .subheader').html('Click countries to view history');

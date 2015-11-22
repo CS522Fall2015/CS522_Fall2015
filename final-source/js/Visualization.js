@@ -624,7 +624,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 		$('#info #flag').attr('class', '');
 		$('#info h2').html('');
 		$('#country-chart').empty();
-		 
+ 
 		 $scope.points = null;
 		 var populateData = "[\n"
 		 $scope.jsonData.forEach(function(data){
@@ -808,8 +808,15 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
                             crosshair: true
                         },
 						yAxis: {
+							
 							title: {
-								text: $scope.paramSelected
+								text: $scope.paramSelected,
+								style:{
+											width:'200px',
+											opposite: true,
+											padding:'50px'
+								},
+								step: 4
 							},
 							plotLines: [{
 								value: 0,
@@ -818,10 +825,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 							}]
 						},
 						tooltip: {
-							formatter: function() {
-									return '<b>'+ this.series.name +'</b><br/>'+
-									this.x +': '+ this.y;
-							}
+							shared:true
 						},
 						legend: {
 							x: 0,
