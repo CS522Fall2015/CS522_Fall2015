@@ -166,7 +166,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 			}		 
 		 if(number == 0)
 		 {
-		 	alert("check0");
+		
 		 	$("#stackedBarChart").addClass('activeGraph');
 		 	$("#lineChart").removeClass('activeGraph');
 		 	$("#scatterPlot").removeClass('activeGraph');
@@ -235,7 +235,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 }
 		 else if(number == 1)
 		 {
-		 	alert("check1");
+		 
 
 		 	$("#stackedBarChart").removeClass('activeGraph');
 		 	$("#lineChart").addClass('activeGraph');
@@ -305,7 +305,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		 }
 		 else if(number == 2)
 		 {
-		 	alert("check2");
+		 
 
 		 	$("#stackedBarChart").removeClass('activeGraph');
 		 	$("#lineChart").removeClass('activeGraph');
@@ -504,7 +504,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 			{
 				if(number == 0)
 				{
-					alert("single1");
+					
 					$("#lineChart_single").addClass('activeGraph');
 	 				$("#barChart_single").removeClass('activeGraph');
 					checker_single = 1
@@ -557,7 +557,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 				}
 				else
 				{
-					alert("single 2");
+				
 					$("#lineChart_single").removeClass('activeGraph');
 	 				$("#barChart_single").addClass('activeGraph');
 					checker_single = 1

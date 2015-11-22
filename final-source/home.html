@@ -76,7 +76,7 @@ font-family: Abel;
 <body ng-app="myApp">
   <div id="siteHeader">
     <center>
-      <a href="home.html"> <img src="css/logo.png" style="width:38%;margin-top:15px;margin-bottom:-7px"/></a>
+      <a href="home.html"> <img src="css/logo.png" style="width:25%;margin-top:8px;margin-bottom:-7px"/></a>
     </center>
   </div>
   <div class="containerVertical">
@@ -123,8 +123,11 @@ font-family: Abel;
 				</p>
 				<p>
 				<span class="subheading">Map Based Visualization</span><br>
-				Propotional symbol map are used to alleviate the regional areas in conventional choropleth maps. User can get additional information about a country and the data on demand.  
+				Map based visualization provides a beautiful linking of data where users can select multiplle countries in world map one after another and visualize the link between the selected year and the historic urban development trend. 
 				</p>
+            <span class="subheading">Motion Visualization</span><br>
+        Dynamic motion charts based on bubble maps which change over time with a built-in auto play feature to visualize the trend in urban development. It shows an interactive exploration and visualization of longitudinal multivariate data.
+        </p>
 			 </div>
 
             
@@ -201,14 +204,11 @@ font-family: Abel;
 	   
 	   <!-- Motion Visualization -->
         <div class="bhoechie-tab-content">
-         <center>
-			<center>Motion Chart</center>
-			<div id="chart_div" style="width: 600px; height: 300px;">
-				<script type="text/javascript">
-					motionChart();
-				</script>
-			</div>
-        <center>
+  			<div id="chart_div" style="width: 600px; height: 400px;float:left;margin-left:80px";>
+  				<script type="text/javascript">
+  					motionChart();
+  				</script>
+  			</div>
        </div>
 	   
     </div>
