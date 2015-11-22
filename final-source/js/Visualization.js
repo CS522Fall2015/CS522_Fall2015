@@ -718,7 +718,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
                     $('#info h2').html('Multi-Country Comparison');
 
                 }
-                $('#info .subheader').html('<small><em>Shift + Click on map to compare countries</em></small>');
+                $('#info .subheader').html('<span class="subheading"><small><em>Shift + Click on map to compare countries</em></small></span>');
 
 				for(var i =0; i < $scope.points.length; i++)
 				{
