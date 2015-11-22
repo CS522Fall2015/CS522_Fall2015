@@ -169,10 +169,10 @@ font-family: Abel;
             ng-model="countrySelected" ng-options="country for country in countries"
             multiple="multiple" multiselect-dropdown style="height: 110px"></select>              
           </div>
-          <select style="margin-top:-110px;float:right;margin-right:21px"id="parameter" ng-model="paramSelected" ng-options='param for param in params' value="---- select a parameter ----" disabled></select>
+          <select style="margin-top:-110px; margin-left:435px" id="parameter" ng-model="paramSelected" ng-options='param for param in params' disabled></select>
 
-          <div id="comparisonButtons">
-              <button id="lineChart" type="button" class="btn btn-primary btn-spacing" style='margin-left:60px' id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>
+          <div id="comparisonButtons" >
+              <button id="lineChart" type="button" class="btn btn-primary btn-spacing" style='margin-left:115px' id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>
               <button id="stackedBarChart" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(0)" disabled>Stacked Bar Chart</button>
               <button id="scatterPlot" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(2)" disabled>Scatter Plot</button>
           </div>
