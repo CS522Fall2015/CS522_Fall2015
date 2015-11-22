@@ -154,7 +154,7 @@ font-family: Abel;
               <button type="button" class="btn btn-primary btn-spacing" id="barChart_single" ng-click="showChart_single(1)" disabled>Bar Chart</button>
             </div>
            <div id="container_single" class="container" style="min-width: 260px; height: 360px; margin: 50 auto"></div>
-		   <center id="zoomable">The graph is zoomable. Select the area to be zoomed in by click and drag of the mouse.</center>
+		   <p class="zoomable">The graph is zoomable. Select the area to be zoomed in by click and drag of the mouse.</p>
          </div>
 
          <!-- Multi-Country Comparison --> 
@@ -177,34 +177,41 @@ font-family: Abel;
           </div>
           <center>
             <div id="container" style="min-width: 260px; height: 360px; margin: 50 auto"></div>
-			<p id="zoomable">The graph is zoomable. Select the area to be zoomed in by click and drag of the mouse.</p>
+			<p class="zoomable">The graph is zoomable. Select the area to be zoomed in by click and drag of the mouse.</p>
           </center>
 
         </div>
 
         <!-- Map based visualization -->
         <div class="bhoechie-tab-content" ng-controller="jsonMapCtrl">
+
           <div class="row">
                 <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Year</span></div> 
                 <div class="col-md-5"><span class="subheading">Choose Parameter</span> </div>
           </div>
-      <!--    <center> -->
+   
           <div id="wrapper">
             <div class="row">
-                <div style="margin-left: 85px" class="col-md-5"><span><select id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'> </select></span></div> 
+                <div style="margin-left: 85px" class="col-md-5"><span><select style="width:65%" id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'> </select></span></div> 
                 <div class="col-md-5"><span><select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'></select></span> </div>
           </div>
             
       			
-      			<div id="container_map"></div>
+      			<div id="container_map">
+                 <center style="margin-top:60px">
+                  <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
+                  <h4 style="margin-top: 0;color:#55518a"> Choose Year and Parameter to View Map Visualization</h4>
+              </center>
+            </div>
       			<div id="info">
       				<span class="f32"><span id="flag"></span></span>
       				<h2></h2>
       				<div id='subheader' class="subheader"></div>
-      				<div id="country-chart" style=""></div>
+
+      				<div id="country-chart" style="height:250px;width:600px;margin:5px 150px"></div>
       			</div>
       		</div>
-     <!--    <center> -->
+ 
        </div>
 	   
 	   <!-- Motion Visualization -->

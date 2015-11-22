@@ -845,8 +845,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 							zoomType: 'xy'
 						},
 						title: {
-							//text: $scope.paramSelected,
-							text:"",
+							text: $scope.paramSelected,
+							//text:"",
 							x: -20 //center
 						},
 						// subtitle: {
