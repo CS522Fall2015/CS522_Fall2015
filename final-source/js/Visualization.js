@@ -195,7 +195,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						zoomType: 'xy'
 					},
 					title: {
-						text: 'Test1 graph',
+						text: 'Multi-Country Comparison',
 						x: -20 //center
 					},
 					subtitle: {
@@ -266,7 +266,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						zoomType: 'xy'
 					},
 					title: {
-						text: 'Test1 graph',
+						text: 'Multi-Country Comparison',
 						x: -20 //center
 					},
 					subtitle: {
