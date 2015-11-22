@@ -150,7 +150,7 @@ font-family: Abel;
 
            <select style="margin-left:14px" id="parameter_single" ng-model="paramSelected_single" ng-options='param for param in params_single' disabled></select>
          </div>
-            <div style="margin:35 10 0 0;text-align:center">
+            <div style="margin:35 0 0 180;text-align:center">
               <button type="button" class="btn btn-primary btn-spacing" id="lineChart_single" ng-click="showChart_single(0)" disabled>Line Chart</button>
               <button type="button" class="btn btn-primary btn-spacing" id="barChart_single" ng-click="showChart_single(1)" disabled>Bar Chart</button>
             </div>
@@ -169,10 +169,10 @@ font-family: Abel;
             ng-model="countrySelected" ng-options="country for country in countries"
             multiple="multiple" multiselect-dropdown style="height: 110px"></select>              
           </div>
-          <select style="margin-top:-110px;float:right;margin-right:21px"id="parameter" ng-model="paramSelected" ng-options='param for param in params' value="---- select a parameter ----" disabled></select>
+          <select style="margin-top:-110px;float:right;margin-left:435px;margin-right:-25px"id="parameter" ng-model="paramSelected" ng-options='param for param in params' disabled></select>
 
           <div id="comparisonButtons">
-              <button id="lineChart" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>
+              <button id="lineChart" type="button" class="btn btn-primary btn-spacing" style='margin-left:115px' id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>
               <button id="stackedBarChart" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(0)" disabled>Stacked Bar Chart</button>
               <button id="scatterPlot" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(2)" disabled>Scatter Plot</button>
           </div>
@@ -198,16 +198,16 @@ font-family: Abel;
           </div>
             
       			
-      			<div id="container_map" style="margin:2px;padding:2px;">
+      			<div id="container_map" style="margin:2px;padding:2px;margin-left:5px">
                  <center style="margin-top:60px">
                   <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
                   <h4 style="margin-top: 0;color:#55518a"> Choose Year and Parameter to View Map Visualization</h4>
               </center>
             </div>
       			<div id="info">
-      				<span class="f32"><span id="flag"></span></span>
-      				<h2></h2>
-      				<div id='subheader' class="subheader"></div>
+      				<center><span class="f32"><span id="flag"></span></span></center>
+      				<center><h2></h2></center>
+      				<center><div id='subheader' class="subheader"></div></center>
 
       				<center><div id="country-chart" style="height:250px;width:700px"></div></center>
       			</div>
