@@ -796,8 +796,9 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 							zoomType: 'xy'
 						},
 						title: {
-							text: $scope.paramSelected,
-							x: -20 
+							//text: $scope.paramSelected,
+							text:"",
+							//x: -20 
 						},
 						xAxis: {
                             tickPixelInterval: 50,
@@ -862,7 +863,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
         mapChart = $('#container_map').highcharts('Map', {
 			color: ['#e0f3db', '#a8ddb5', '#43a2ca'],
             title : {
-                text : $scope.yearSelected +" " + $scope.paramSelected
+                text : $scope.yearSelected +": " + $scope.paramSelected
             },
 
             // subtitle: {
@@ -915,7 +916,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
             }]
         }).highcharts();
 
-		$("#container_map").addClass('mapBorder');
+		// $("#container_map").addClass('mapBorder');
 
 		if($scope.paramSelected != null && $scope.yearSelected != null) 
 			$('#info .subheader').html('Click countries to view history');

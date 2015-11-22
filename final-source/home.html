@@ -197,29 +197,29 @@ font-family: Abel;
         <div class="bhoechie-tab-content" ng-controller="jsonMapCtrl">
 
           <div class="row">
-                <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Year</span></div> 
+                <div style="margin-left: 69px" class="col-md-5"><span class="subheading">Choose Year</span></div> 
                 <div class="col-md-5"><span class="subheading">Choose Parameter</span> </div>
           </div>
    
           <div id="wrapper">
             <div class="row">
-                <div style="margin-left: 85px" class="col-md-5"><span><select style="width:65%" id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'> </select></span></div> 
+                <div style="margin-left: 75px" class="col-md-5"><span><select style="width:65%" id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'> </select></span></div> 
                 <div class="col-md-5"><span><select style="width:115%" id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'></select></span> </div>
           </div>
             
       			
-      			<div id="container_map" style="margin:2px;padding:2px;margin-left:5px">
-                 <center style="margin-top:60px">
+      			<div id="container_map" style="padding:2px;margin-left:-30px;width:75%">
+                 <center style="margin-top:130px;margin-left:300px">
                   <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
-                  <h4 style="margin-top: 0;color:#55518a"> Choose Year and Parameter to View Map Visualization</h4>
+                  <h4 style="margin-top: 0;color:#55518a"> Choose Year and Parameter to View Map</h4>
               </center>
             </div>
+
       			<div id="info">
       				<span class="f32"><span id="flag"></span></span>
       				<h2></h2>
       				<div id='subheader' class="subheader"></div>
-
-      				<center><div id="country-chart" style="height:250px;width:700px"></div></center>
+      				<div id="country-chart" style="height:450px;width:300px"></div>
       			</div>
       		</div>
  

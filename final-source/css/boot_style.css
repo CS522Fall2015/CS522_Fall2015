@@ -108,4 +108,9 @@
     .mapBorder{
       border: 1px solid #5A55A3;
     }
+    #info{
+      float:right;
+      margin-right:-102px;
+      margin-top:-400px;
+    }
 
