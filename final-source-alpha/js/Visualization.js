@@ -6,6 +6,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
   $scope.paramSelected = null;
   $scope.countries = [];
   $scope.params = [];
+  $scope.indicator_multi = null;
   var checker = 0;
   $scope.seriesCategories= [];
   $scope.seriesData = [];
@@ -99,6 +100,54 @@ myApp.controller('MyCtrl', function($scope, $http) {
 		trueData += "\n]"
 		var testData = JSON.parse(trueData);
 		
+		switch($scope.paramSelected)
+		{
+			case "Population density (people per sq. km of land area)":
+				$scope.indicator_multi = 'people per sq. km of land area';
+				break;
+			case "Population in largest city":
+				$scope.indicator_multi = 'Population in largest city';
+				break;
+			case "Population in the largest city (% of urban population)":
+				$scope.indicator_multi = '(%) of urban population';
+				break;
+			case "Population in urban agglomerations of more than 1 million":
+				$scope.indicator_multi = 'Population in urban agglomerations';
+				break;
+			case "Population in urban agglomerations of more than 1 million (% of total population)":
+				$scope.indicator_multi = '(%) of total population';
+				break;
+			case "Pump price for diesel fuel (US$ per liter)":
+				$scope.indicator_multi = 'US$ per liter';
+				break;
+			case "Pump price for gasoline (US$ per liter)":
+				$scope.indicator_multi = 'US$ per liter';
+				break;
+			case "Improved water source, urban (% of urban population with access)":
+				$scope.indicator_multi = '(%) of urban population with access';
+				break;
+			case "Improved sanitation facilities, urban (% of urban population with access)":
+				$scope.indicator_multi = '(%) of urban population with access';
+				break;
+			case "Urban poverty gap at national poverty lines (%)":
+				$scope.indicator_multi = 'total (%)';
+				break;
+			case "Urban poverty headcount ratio at national poverty lines (% of urban population)":
+				$scope.indicator_multi = '% of urban population';
+				break;
+			case "Urban population growth (annual %)":
+				$scope.indicator_multi = 'annual (%)';
+				break;
+			case "Urban population":
+				$scope.indicator_multi = 'Urban population';
+				break;
+			case "Urban population (% of total)":
+				$scope.indicator_multi = '(%) of total';
+				break;
+			default:
+				$scope.indicator_multi = 'Value';
+		}
+		
 		$scope.seriesData = [];
 		for(var i = 0; i < testData.length; i++)
 			{
@@ -142,7 +191,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					},
 					yAxis: {
 						title: {
-							text: $scope.paramSelected
+							text: $scope.indicator_multi
 						},
 						plotLines: [{
 							value: 0,
@@ -211,7 +260,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					},
 					yAxis: {
 						title: {
-							text: $scope.paramSelected
+							text: $scope.indicator_multi
 						},
 						plotLines: [{
 							value: 0,
@@ -278,7 +327,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					},
 					yAxis: {
 						title: {
-							text: $scope.paramSelected
+							text: $scope.indicator_multi
 						},
 						plotLines: [{
 							value: 0,
@@ -331,6 +380,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 	$scope.paramSelected_single = null;
 	$scope.countries_single = [];
 	$scope.params_single = [];
+	$scope.indicator_single = null;
 	var checker_single = 0
 	
 	  //to make sure that the page loads after the file has been paesed.
@@ -429,6 +479,54 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 				
 		}
 		
+		switch($scope.paramSelected_single)
+		{
+			case "Population density (people per sq. km of land area)":
+				$scope.indicator_single = 'people per sq. km of land area';
+				break;
+			case "Population in largest city":
+				$scope.indicator_single = 'Population in largest city';
+				break;
+			case "Population in the largest city (% of urban population)":
+				$scope.indicator_single = '(%) of urban population';
+				break;
+			case "Population in urban agglomerations of more than 1 million":
+				$scope.indicator_single = 'Population in urban agglomerations';
+				break;
+			case "Population in urban agglomerations of more than 1 million (% of total population)":
+				$scope.indicator_single = '(%) of total population';
+				break;
+			case "Pump price for diesel fuel (US$ per liter)":
+				$scope.indicator_single = 'US$ per liter';
+				break;
+			case "Pump price for gasoline (US$ per liter)":
+				$scope.indicator_single = 'US$ per liter';
+				break;
+			case "Improved water source, urban (% of urban population with access)":
+				$scope.indicator_single = '(%) of urban population with access';
+				break;
+			case "Improved sanitation facilities, urban (% of urban population with access)":
+				$scope.indicator_single = '(%) of urban population with access';
+				break;
+			case "Urban poverty gap at national poverty lines (%)":
+				$scope.indicator_single = 'total (%)';
+				break;
+			case "Urban poverty headcount ratio at national poverty lines (% of urban population)":
+				$scope.indicator_single = '% of urban population';
+				break;
+			case "Urban population growth (annual %)":
+				$scope.indicator_single = 'annual (%)';
+				break;
+			case "Urban population":
+				$scope.indicator_single = 'Urban population';
+				break;
+			case "Urban population (% of total)":
+				$scope.indicator_single = '(%) of total';
+				break;
+			default:
+				$scope.indicator_single = 'Value';
+		}
+		
 		var checker_single_country = document.getElementById('country');
 		var checker_single_parameter = document.getElementById('parameter');
 		
@@ -478,7 +576,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 								},
 								yAxis: {
 									title: {
-										text: $scope.paramSelected_single
+										text: $scope.indicator_single
 									},
 									plotLines: [{
 										value: 0,
@@ -532,7 +630,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 								},
 								yAxis: {
 									title: {
-										text: $scope.paramSelected_single
+										text: $scope.indicator_single
 									},
 									plotLines: [{
 										value: 0,
@@ -574,6 +672,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 	$scope.countries = [];
 	$scope.params = [];
 	$scope.years = [];
+	$scope.indicator = null;
 	$scope.seriesData = undefined;
 	
 	  //to make sure that the page loads after the file has been paesed.
@@ -696,6 +795,54 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 		 });
 		 populateData += '\n]';
 		 
+		switch($scope.paramSelected)
+		{
+			case "Population density (people per sq. km of land area)":
+				$scope.indicator = 'people per sq. km of land area';
+				break;
+			case "Population in largest city":
+				$scope.indicator = 'Population in largest city';
+				break;
+			case "Population in the largest city (% of urban population)":
+				$scope.indicator = '(%) of urban population';
+				break;
+			case "Population in urban agglomerations of more than 1 million":
+				$scope.indicator = 'Population in urban agglomerations';
+				break;
+			case "Population in urban agglomerations of more than 1 million (% of total population)":
+				$scope.indicator = '(%) of total population';
+				break;
+			case "Pump price for diesel fuel (US$ per liter)":
+				$scope.indicator = 'US$ per liter';
+				break;
+			case "Pump price for gasoline (US$ per liter)":
+				$scope.indicator = 'US$ per liter';
+				break;
+			case "Improved water source, urban (% of urban population with access)":
+				$scope.indicator = '(%) of urban population with access';
+				break;
+			case "Improved sanitation facilities, urban (% of urban population with access)":
+				$scope.indicator = '(%) of urban population with access';
+				break;
+			case "Urban poverty gap at national poverty lines (%)":
+				$scope.indicator = 'total (%)';
+				break;
+			case "Urban poverty headcount ratio at national poverty lines (% of urban population)":
+				$scope.indicator = '% of urban population';
+				break;
+			case "Urban population growth (annual %)":
+				$scope.indicator = 'annual (%)';
+				break;
+			case "Urban population":
+				$scope.indicator = 'Urban population';
+				break;
+			case "Urban population (% of total)":
+				$scope.indicator = '(%) of total';
+				break;
+			default:
+				$scope.indicator = 'Value';
+		}
+	 
 		 $scope.trueData = JSON.parse(populateData);
 		 
 		 var mapData = Highcharts.geojson(Highcharts.maps['custom/world']);
@@ -743,6 +890,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 						}
 					});
 				}
+				
+				
 				
 				$scope.chartData = [];
 		
@@ -799,24 +948,23 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 							zoomType: 'xy'
 						},
 						title: {
-							//text: $scope.paramSelected,
+							text: $scope.paramSelected,
 							text:"",
 							//x: -20 
 						},
+						subtitle: {
+							text: $scope.paramSelected,
+							x: -20
+						},
 						xAxis: {
-                            tickPixelInterval: 50,
-                            crosshair: true
+                            //tickPixelInterval: 50,
+                            crosshair: true,
+							categories: $scope.years
                         },
 						yAxis: {
 							
 							title: {
-								text: $scope.paramSelected,
-								style:{
-											width:'200px',
-											opposite: true,
-											padding:'50px'
-								},
-								step: 4
+								text:$scope.indicator
 							},
 							plotLines: [{
 								value: 0,
@@ -896,10 +1044,10 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 		        spacingTop: 5,
 		        spacingLeft: 1,
 		        spacingRight: 0,
-
+				
 		        // Explicitly tell the width and height of a chart
 		        width: null,
-		        height: null
+		        height: 350
 		},
 
             // tooltip: {
