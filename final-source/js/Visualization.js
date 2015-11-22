@@ -791,24 +791,18 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 				$('#country-chart').highcharts({
 						colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 						chart:{
+							height: 250,
+                            spacingLeft: 0,
 							zoomType: 'xy'
 						},
 						title: {
 							text: $scope.paramSelected,
-							//text:"",
-							x: -20 //center
+							x: -20 
 						},
-						// subtitle: {
-						// 	text: $scope.paramSelected,
-						// 	x: -20
-						// },
 						xAxis: {
-							categories: $scope.seriesCategories,
-							title: {
-										text: null
-									},
-									min: 0
-						},
+                            tickPixelInterval: 50,
+                            crosshair: true
+                        },
 						yAxis: {
 							title: {
 								text: $scope.paramSelected
@@ -826,18 +820,15 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 							}
 						},
 						legend: {
-							//align: 'right',
 							x: 0,
-							//verticalAlign: 'top',
 							y: 0,
-							//floating: true,
 							backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 							borderColor: '#CCC',
 							borderWidth: 1,
 							shadow: true
 						},
 						 plotOptions: {
-							column: {
+							line: {
 								stacking: 'normal',
 								dataLabels: {
 									enabled: false,
@@ -845,7 +836,12 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 									style: {
 										textShadow: '0 0 3px black'
 									}
-								}
+									
+								},
+								marker: {
+										enabled: false
+									}
+							
 							}
 						},
 						series: $scope.seriesData
