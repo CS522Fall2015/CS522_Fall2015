@@ -621,6 +621,9 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 	 
 	 $scope.createData = function(){
 		 
+		$('#info #flag').attr('class', '');
+		$('#info h2').html('');
+		$('#country-chart').empty();
 		 
 		 $scope.points = null;
 		 var populateData = "[\n"
