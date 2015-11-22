@@ -1,5 +1,6 @@
 var myApp = angular.module('myApp',['ui.bootstrap']);
 
+<<<<<<< HEAD
 
 myApp.directive('multiselectDropdown', [function() {
     return function(scope, jQueryElement, attributes) {
@@ -53,6 +54,8 @@ myApp.directive('multiselectDropdown', [function() {
     }
 }]);
 
+=======
+>>>>>>> origin/master
 myApp.controller('MyCtrl', function($scope, $http) {
 
   $scope.countrySelected = [];
