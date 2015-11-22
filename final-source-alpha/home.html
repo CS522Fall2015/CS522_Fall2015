@@ -207,7 +207,8 @@
                   <div class="col-md-5"><span><select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'></select></span> </div>
             </div>
               
-        			
+        			<!-- CODE FOR NORMAL VIEW!-->
+
         <!-- 			<div id="container_map" style="margin:2px;padding:2px;margin-left:5px">
                    <center style="margin-top:60px">
                     <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
@@ -221,6 +222,8 @@
 
         				<center><div id="country-chart" style="height:250px;width:700px"></div></center>
         			</div> -->
+              <!-- END OF CODE NORMAL VIEW!-->
+              
               <!-- CODE FOR SIDE BY SIDE VIEW!-->
                     <div id="container_map" style="padding:2px;margin-left:-30px;width:75%">
                    <center style="margin-top:130px;margin-left:300px">
@@ -229,12 +232,14 @@
                 </center>
               </div>
 
-              <div id="info">
+              <div id="info" style="float:right;margin-right:-73px;margin-top:-372px;">
                 <span class="f32"><span id="flag"></span></span>
                 <h2></h2>
                 <div id='subheader' class="subheader"></div>
                 <div id="country-chart" style="height:450px;width:300px"></div>
               </div>
+
+              <!-- END OF CODE SIDE BY SIDE!-->
         		</div>
    
          </div>
