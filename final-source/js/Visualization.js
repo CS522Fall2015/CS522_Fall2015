@@ -1,10 +1,11 @@
 var myApp = angular.module('myApp',['ui.bootstrap']);
 
+
 myApp.directive('multiselectDropdown', [function() {
     return function(scope, jQueryElement, attributes) {
         
         jQueryElement = $(jQueryElement[0]); // Get the jQueryElement as a jQuery jQueryElement
-        
+       
         // Below setup the dropdown:
         
         jQueryElement.multiselect({
@@ -163,7 +164,8 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					
 					
 				}
-			}		 
+			}	
+			 $(".zoomable").show();	 
 		 if(number == 0)
 		 {
 		
@@ -417,7 +419,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 	$scope.showChart_single = function(number){
 
 		$scope.chartData_single = [];
-
+ 		$(".zoomable").show();
 		$scope.jsonData_single.forEach(function(item) {
 		
 		var checker = 0;
@@ -969,6 +971,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
                 }
             }]
         }).highcharts();
+
+		$("#container_map").addClass('mapBorder');
 
 		if($scope.paramSelected != null && $scope.yearSelected != null) 
 			$('#info .subheader').html('Click countries to view history');

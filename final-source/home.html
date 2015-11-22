@@ -30,6 +30,7 @@
   
   <script type="text/javascript">
   $(document).ready(function() {
+    $(".zoomable").hide();
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
       e.preventDefault();
       $(this).siblings('a.active').removeClass("active");
@@ -197,7 +198,7 @@ font-family: Abel;
           </div>
             
       			
-      			<div id="container_map">
+      			<div id="container_map" style="margin:2px;padding:2px;">
                  <center style="margin-top:60px">
                   <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
                   <h4 style="margin-top: 0;color:#55518a"> Choose Year and Parameter to View Map Visualization</h4>
@@ -208,7 +209,7 @@ font-family: Abel;
       				<h2></h2>
       				<div id='subheader' class="subheader"></div>
 
-      				<div id="country-chart" style="height:250px;width:600px;margin:5px 150px"></div>
+      				<center><div id="country-chart" style="height:250px;width:700px"></div></center>
       			</div>
       		</div>
  

@@ -105,4 +105,7 @@
       font-style: italic;
       margin-top:-52px;
     }
+    .mapBorder{
+      border: 1px solid #5A55A3;
+    }
 
