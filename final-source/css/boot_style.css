@@ -96,3 +96,8 @@
         .activeGraph{
       background-color: #484482;
     }
+    #comparisonButtons{
+      margin-left: 321px;
+      margin-top:-55px;
+    }
+

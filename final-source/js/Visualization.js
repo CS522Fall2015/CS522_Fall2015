@@ -766,10 +766,10 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
                     $('#info h2').html($scope.points[0].name);
                 } else {
                     $('#info #flag').attr('class', 'flag');
-                    $('#info h2').html('Comparing countries');
+                    $('#info h2').html('Multi-Country Comparison');
 
                 }
-                $('#info .subheader').html('<h4>Historical population</h4><small><em>Shift + Click on map to compare countries</em></small>');
+                $('#info .subheader').html('<small><em>Shift + Click on map to compare countries</em></small>');
 
 				for(var i =0; i < $scope.points.length; i++)
 				{
@@ -845,13 +845,14 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 							zoomType: 'xy'
 						},
 						title: {
-							text: 'History',
+							//text: $scope.paramSelected,
+							text:"",
 							x: -20 //center
 						},
-						subtitle: {
-							text: $scope.paramSelected,
-							x: -20
-						},
+						// subtitle: {
+						// 	text: $scope.paramSelected,
+						// 	x: -20
+						// },
 						xAxis: {
 							categories: $scope.seriesCategories,
 							title: {
@@ -916,12 +917,12 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
         mapChart = $('#container_map').highcharts('Map', {
 			color: ['#e0f3db', '#a8ddb5', '#43a2ca'],
             title : {
-                text : $scope.paramSelected
+                text : $scope.yearSelected +" " + $scope.paramSelected
             },
 
-            subtitle: {
-                text: 'Year: ' + $scope.yearSelected
-            },
+            // subtitle: {
+            //     text: 'Year: ' + $scope.yearSelected
+            // },
 
             mapNavigation: {
                 enabled: true,
@@ -936,16 +937,27 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
                 startOnTick: true,
                 min: 0
             },
+            chart: {
+		        // Edit chart spacing
+		        spacingBottom: 0,
+		        spacingTop: 5,
+		        spacingLeft: 1,
+		        spacingRight: 0,
 
-            tooltip: {
-                footerFormat: '<span style="font-size: 10px">(Click for details)</span>'
-            },
+		        // Explicitly tell the width and height of a chart
+		        width: null,
+		        height: null
+		},
+
+            // tooltip: {
+            //     footerFormat: '<span style="font-size: 10px">(Click for details)</span>'
+            // },
 
             series : [{
                 data : $scope.trueData,
                 mapData: mapData,
                 joinBy: ['iso-a3', 'code3'],
-                name: 'Current population',
+                name: 'Click for more details',
                 allowPointSelect: true,
                 cursor: 'pointer',
                 states: {

@@ -97,7 +97,7 @@ font-family: Abel;
               <h4 class="glyphicon glyphicon-globe"></h4><br/>Map Based Visualization
             </a>
 			<a href="#" class="list-group-item text-center">
-              <h4 class="glyphicon glyphicon-th-large"></h4><br/>Motion Visualization
+              <h4 class="glyphicon glyphicon-play-circle"></h4><br/>Motion Visualization
             </a>
           </div>
         </div>
@@ -138,16 +138,16 @@ font-family: Abel;
 
           <div id="singleCountryVisualization" class="bhoechie-tab-content" ng-controller="jsonDataCtrl_single">
               <div class="row">
-              <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Country</span></div> 
-              <div style="margin-left:-16px"class="col-md-5"><span class="subheading">Choose Parameter</span> </div>
-          </div>
+                <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Country</span></div> 
+                <div class="col-md-5"><span class="subheading">Choose Parameter</span> </div>
+              </div>
 
           <div class="row">
-            <div style="margin-left: 79px" class="col-md-5 text-font">
+            <div style="margin-left: 83px" class="col-md-5 text-font">
            <input style="height:20px;width: 65%" id="country_single" type="text" ng-model="countrySelected_single" uib-typeahead="country for country in countries_single | filter:$viewValue" class="form-control" placeholder="Start Typing a Country's Name..">
            </div>
 
-           <select id="parameter_single" ng-model="paramSelected_single" ng-options='param for param in params_single' disabled></select>
+           <select style="margin-left:14px" id="parameter_single" ng-model="paramSelected_single" ng-options='param for param in params_single' disabled></select>
          </div>
             <div style="margin:35 10 0 0;text-align:center">
               <button type="button" class="btn btn-primary btn-spacing" id="lineChart_single" ng-click="showChart_single(0)" disabled>Line Chart</button>
@@ -160,20 +160,20 @@ font-family: Abel;
          <!-- Multi-Country Comparison --> 
          <div id="multiCountryVisualization" class="bhoechie-tab-content" ng-controller="MyCtrl">
           <div class="row">
-            <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Select Multiple Countries</span></div>
-            <div class="col-md-4 pull-left"><span class="subheading">Choose Parameter to Compare</span></div>
+            <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Country</span></div>
+            <div class="col-md-5"><span class="subheading">Choose Parameter</span></div>
           </div>
           <div>
             <select class="multiselect" id="multiselect"
             ng-model="countrySelected" ng-options="country for country in countries"
             multiple="multiple" multiselect-dropdown style="height: 110px"></select>              
           </div>
-          <select style="margin-top:-100px;float:right;margin-right:8px"id="parameter" ng-model="paramSelected" ng-options='param for param in params' value="---- select a parameter ----" disabled></select>
-          <div style="float:right;margin-top:-50px;margin-right:10px">
+          <select style="margin-top:-110px;float:right;margin-right:21px"id="parameter" ng-model="paramSelected" ng-options='param for param in params' value="---- select a parameter ----" disabled></select>
 
-            <button id="stackedBarChart" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(0)" disabled>Stacked Bar Chart</button>
-            <button id="lineChart" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>
-            <button id="scatterPlot" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(2)" disabled>Scatter Plot</button>
+          <div id="comparisonButtons">
+              <button id="lineChart" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>
+              <button id="stackedBarChart" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(0)" disabled>Stacked Bar Chart</button>
+              <button id="scatterPlot" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(2)" disabled>Scatter Plot</button>
           </div>
           <center>
             <div id="container" style="min-width: 260px; height: 360px; margin: 50 auto"></div>
@@ -184,27 +184,32 @@ font-family: Abel;
 
         <!-- Map based visualization -->
         <div class="bhoechie-tab-content" ng-controller="jsonMapCtrl">
-         <center>
+          <div class="row">
+                <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Year</span></div> 
+                <div class="col-md-5"><span class="subheading">Choose Parameter</span> </div>
+          </div>
+      <!--    <center> -->
           <div id="wrapper">
-			<select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'></select>
-			<select id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'>	
-			</select>
-
-			<br>
-			<div id="container_map"></div>
-			<div id="info">
-				<span class="f32"><span id="flag"></span></span>
-				<h2></h2>
-				<div id='subheader' class="subheader"></div>
-				<div id="country-chart"></div>
-			</div>
-		</div>
-        <center>
+            <div class="row">
+                <div style="margin-left: 85px" class="col-md-5"><span><select id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'> </select></span></div> 
+                <div class="col-md-5"><span><select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'></select></span> </div>
+          </div>
+            
+      			
+      			<div id="container_map"></div>
+      			<div id="info">
+      				<span class="f32"><span id="flag"></span></span>
+      				<h2></h2>
+      				<div id='subheader' class="subheader"></div>
+      				<div id="country-chart" style=""></div>
+      			</div>
+      		</div>
+     <!--    <center> -->
        </div>
 	   
 	   <!-- Motion Visualization -->
         <div class="bhoechie-tab-content">
-  			<div id="chart_div" style="width: 600px; height: 400px;float:left;margin-left:80px";>
+  			<div id="chart_div" style="width: 600px; height: 400px;float:left;margin-left:60px";>
   				<script type="text/javascript">
   					motionChart();
   				</script>
