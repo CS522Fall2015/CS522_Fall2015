@@ -218,7 +218,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					},
 					 plotOptions: {
 						column: {
-							//stacking: 'normal',
+							stacking: 'normal',
 							dataLabels: {
 								enabled: false,
 								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
@@ -354,14 +354,17 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					},
 					 plotOptions: {
 						column: {
-							//stacking: 'normal',
+							stacking: 'normal',
 							dataLabels: {
 								enabled: false,
 								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
 								style: {
 									textShadow: '0 0 3px black'
 								}
-							}
+							},
+							marker: {
+										enabled: false
+									}
 						}
 					},
 					series: $scope.seriesData
