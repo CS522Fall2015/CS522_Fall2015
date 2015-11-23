@@ -1,6 +1,6 @@
     [
         {
-            "code": "AFG",
+            "code": "AF",
             "z": 30552
         }, {
             "code": "AL",
