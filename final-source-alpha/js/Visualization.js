@@ -218,7 +218,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					},
 					 plotOptions: {
 						column: {
-							stacking: 'normal',
+							//stacking: 'normal',
 							dataLabels: {
 								enabled: false,
 								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
@@ -285,7 +285,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					},
 					 plotOptions: {
 						line: {
-							stacking: 'normal',
+							//stacking: 'normal',
 							dataLabels: {
 								enabled: false,
 								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
@@ -354,7 +354,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 					},
 					 plotOptions: {
 						column: {
-							stacking: 'normal',
+							//stacking: 'normal',
 							dataLabels: {
 								enabled: false,
 								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
@@ -965,7 +965,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 						xAxis: {
                             //tickPixelInterval: 50,
                             crosshair: true,
-							categories: $scope.years
+							categories: $scope.years,
+							reversed:false
                         },
 						yAxis: {
 							
@@ -991,7 +992,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 						},
 						 plotOptions: {
 							line: {
-								stacking: 'normal',
+								//stacking: 'normal',
 								dataLabels: {
 									enabled: false,
 									color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
