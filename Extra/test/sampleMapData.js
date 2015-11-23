@@ -12,7 +12,7 @@
             "code": "AS",
             "z": 55
         }, {
-            "code": "ADO",
+            "code": "AD",
             "z": 79
         }, {
             "code": "AO",
@@ -42,7 +42,7 @@
             "code": "BS",
             "z": 377
         }, {
-            "code": "BH",
+            "code": "BHD",
             "z": 1332
         }, {
             "code": "BD",
