@@ -198,13 +198,13 @@
             "code": "FI",
             "z": 5439
         }, {
-            "code": "FR",
+            "code": "FRA",
             "z": 65940
         }, {
-            "code": "PF",
+            "code": "PFD",
             "z": 277
         }, {
-            "code": "GA",
+            "code": "GAR",
             "z": 1672
         }, {
             "code": "GM",
@@ -240,7 +240,7 @@
             "code": "GW",
             "z": 1704
         }, {
-            "code": "GY",
+            "code": "GFY",
             "z": 800
         }, {
             "code": "HT",
