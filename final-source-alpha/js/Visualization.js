@@ -1011,7 +1011,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 				
             } else {
                 $('#info #flag').attr('class', '');
-                $('#info h2').html('');
+                $('#info h3').html('');
                 $('#info .subheader').html('Click countries to view history');
                 $('#country-chart').empty();
             }
