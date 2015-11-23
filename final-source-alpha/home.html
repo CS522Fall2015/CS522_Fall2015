@@ -172,8 +172,9 @@
             <div>
               <select class="multiselect" id="multiselect"
               ng-model="countrySelected" ng-options="country for country in countries"
-              multiple="multiple" multiselect-dropdown style="height: 110px"></select>              
+              multiple="multiple" multiselect-dropdown style="height: 110px"></select>
             </div>
+			<span><small><em>Ctrl + Click on country to compare</em></small></span>
             <select style="margin-top:-110px;float:right;margin-left:435px;margin-right:-25px"id="parameter" ng-model="paramSelected" ng-options='param for param in params' disabled></select>
 
             <div id="comparisonButtons">
@@ -225,6 +226,7 @@
               <!-- END OF CODE NORMAL VIEW!-->
               
               <!-- CODE FOR SIDE BY SIDE VIEW!-->
+			  <br>
                     <div id="container_map" style="padding:2px;margin-left:-30px;width:75%">
                    <center style="margin-top:130px;margin-left:300px">
                     <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
@@ -234,7 +236,7 @@
 
               <div id="info" style="float:right;margin-right:-73px;margin-top:-372px;">
                 <span class="f32"><span id="flag"></span></span>
-                <h2></h2>
+                <h3></h3>
                 <div id='subheader' class="subheader"></div>
                 <div id="country-chart" style="height:450px;width:300px"></div>
               </div>
@@ -252,6 +254,7 @@
     				</script>
     			</div>
          </div>
+
   	   
       </div>
     </div>

@@ -270,10 +270,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						min: 0
 					},
 					tooltip: {
-						formatter: function() {
-								return '<b>'+ this.series.name +'</b><br/>'+
-								this.x +': '+ this.y;
-						}
+						shared:true
 					},
 					legend: {
 						//align: 'right',
@@ -287,7 +284,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 						shadow: true
 					},
 					 plotOptions: {
-						column: {
+						line: {
 							stacking: 'normal',
 							dataLabels: {
 								enabled: false,
@@ -295,7 +292,10 @@ myApp.controller('MyCtrl', function($scope, $http) {
 								style: {
 									textShadow: '0 0 3px black'
 								}
-							}
+							},
+							marker: {
+										enabled: false
+									}
 						}
 					},
 					series: $scope.seriesData
@@ -665,7 +665,7 @@ myApp.controller("jsonDataCtrl_single", function($scope, $http) {
 });
 
 
-myApp.controller("jsonMapCtrl", function($scope, $http) {
+myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 	$scope.yearSelected = null;
 	$scope.paramSelected = null;
@@ -674,6 +674,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 	$scope.years = [];
 	$scope.indicator = null;
 	$scope.seriesData = undefined;
+	
+	
 	
 	  //to make sure that the page loads after the file has been paesed.
 	  $http.get('js/finalFile.json')
@@ -862,7 +864,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
             if ($scope.points.length) {
                 if ($scope.points.length === 1) {
                     $('#info #flag').attr('class', 'flag ' + $scope.points[0].flag);
-                    $('#info h2').html($scope.points[0].name);
+                    $('#info h3').html($scope.points[0].name);
                 } else {
                     $('#info #flag').attr('class', 'flag');
                     $('#info h2').html('Multi-Country Comparison');
@@ -925,7 +927,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 				
 				trueData += "\n]"
 				var testData = JSON.parse(trueData);
-				
+								
 				$scope.seriesData = [];
 				for(var i = 0; i < testData.length; i++)
 					{
@@ -943,9 +945,13 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
 				$('#country-chart').highcharts({
 						colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
 						chart:{
-							height: 250,
+							typr:'StockChart',
+							height: 350,
                             spacingLeft: 0,
 							zoomType: 'xy'
+						},
+						rangeSelector : {
+							selected : 1
 						},
 						title: {
 							text: $scope.paramSelected,
@@ -1020,11 +1026,6 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
             title : {
                 text : $scope.yearSelected +": " + $scope.paramSelected
             },
-
-            // subtitle: {
-            //     text: 'Year: ' + $scope.yearSelected
-            // },
-
             mapNavigation: {
                 enabled: true,
                 buttonOptions: {
@@ -1059,6 +1060,14 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
                 mapData: mapData,
                 joinBy: ['iso-a3', 'code3'],
                 name: 'Click for more details',
+				dataLabels: {
+					enabled: true,
+					formatter: function() {
+						if(this.point.options["hide-name"])
+							return;
+						return this.point.name;
+						}
+				},
                 allowPointSelect: true,
                 cursor: 'pointer',
                 states: {
@@ -1071,11 +1080,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http) {
             }]
         }).highcharts();
 
-		// $("#container_map").addClass('mapBorder');
-
 		if($scope.paramSelected != null && $scope.yearSelected != null) 
 			$('#info .subheader').html('Click countries to view history');
 	 }
-
-
 });
