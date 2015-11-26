@@ -127,7 +127,7 @@
   				Map based visualization provides a beautiful linking of data where users can select multiplle countries in world map one after another and visualize the link between the selected year and the historic urban development trend. 
   				</p>
               <span class="subheading">Motion Visualization</span><br>
-          Dynamic motion charts based on bubble maps which change over time with a built-in auto play feature to visualize the trend in urban development. It shows an interactive exploration and visualization of longitudinal multivariate data.
+          Dynamic motion charts based on bubble visualization, taking two parameters for comparison, which change over time with a built-in auto play feature to visualize the trend in urban development. It shows an interactive exploration and visualization of longitudinal multivariate data.
           </p>
   			 </div>
 
@@ -208,8 +208,7 @@
                   <div class="col-md-5"><span><select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'></select></span> </div>
             </div>
               
-        			<!-- CODE FOR NORMAL VIEW!-->
-
+        			
         <!-- 			<div id="container_map" style="margin:2px;padding:2px;margin-left:5px">
                    <center style="margin-top:60px">
                     <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
@@ -223,8 +222,6 @@
 
         				<center><div id="country-chart" style="height:250px;width:700px"></div></center>
         			</div> -->
-              <!-- END OF CODE NORMAL VIEW!-->
-              
               <!-- CODE FOR SIDE BY SIDE VIEW!-->
 			  <br>
                     <div id="container_map" style="padding:2px;margin-left:-30px;width:75%">
@@ -234,14 +231,12 @@
                 </center>
               </div>
 
-              <div id="info" style="float:right;margin-right:-73px;margin-top:-372px;">
+              <div id="info">
                 <span class="f32"><span id="flag"></span></span>
                 <h3></h3>
                 <div id='subheader' class="subheader"></div>
                 <div id="country-chart" style="height:450px;width:300px"></div>
               </div>
-
-              <!-- END OF CODE SIDE BY SIDE!-->
         		</div>
    
          </div>
