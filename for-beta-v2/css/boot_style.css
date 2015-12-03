@@ -1,0 +1,45 @@
+     body {
+  line-height: 2.0;
+}
+      div#siteHeader {
+        text-align: center;
+        color: #5A55A3;
+      }
+      .subheading{
+        color:#5A55A3;
+        font-weight: bold;
+        padding:3px;
+        margin:3px;
+        border-radius: 10px;
+        background-color: #E2E1EF;
+      }
+      .btn-spacing {
+        margin: 0 20px;
+      }
+	  .body-text-font{
+		    color:#5A55A3;
+	  }
+        .activeGraph{
+      background-color: #484482;
+    }
+    #comparisonButtons{
+      margin-left: 321px;
+      margin-top:-55px;
+    }
+    .zoomable{
+      /* text-align: center; */
+	  padding-left: 60px;
+      font-style: italic;
+      margin-top:-52px;
+    }
+    #info{
+      float:right;
+      margin-right:-73px;
+      margin-top:-372px;
+    }
+	.instructions{
+
+      font-style: italic;
+
+    }
+
