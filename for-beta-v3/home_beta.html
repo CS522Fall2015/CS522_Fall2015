@@ -198,7 +198,7 @@
 					<input style="margin-left: 20px" type="radio" name="oneParameter" id="twoParameter" value="twoParameter"> Compare Two Parameter
 			</div>
 			
-            <div id="mapbox"class="map" style="margin-top:3px;height:79%;width:101%;padding:10px 5px" ng-controller="jsonMapCtrl">
+            <div id="mapbox"class="map" style="margin-top:6px;height:79%;width:101%;padding:10px 5px" ng-controller="jsonMapCtrl">
 				<div id="wrapper1">
 					<div>
 						<span class="subheading">Choose Year</span>
@@ -206,7 +206,7 @@
 							<select id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'> 
 							</select>
 						</span>
-						<span  class="subheading" style="margin-left:87px">Choose Parameter</span>
+						<span  class="subheading">Choose Parameter</span>
 						<span>
 							<select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'>
 							</select>
@@ -215,7 +215,7 @@
 				  
 					<!-- <br> -->
 				<div style="margin-top:5px;">
-					<div><span class="mapInfo" style="margin-left:245px"></span> <span class="zoomleg"></span></div>
+					<div><span class="mapInfo"></span> <span class="zoomleg"></span></div>
 					<div id="container_map"></div>
 					<div id="info0">
 						<h3 id="header0"></h3>
@@ -232,7 +232,7 @@
 				
 				
 				
-				<div id="wrapper2" style="margin-top:-27px">
+				<div id="wrapper2" style="margin-top:-5px">
 					<div id="info">
 						<h3 id="header2"></h3>
 						<div id='subheader2' ></div>

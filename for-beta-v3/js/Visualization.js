@@ -90,7 +90,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 		$('#country-chart').empty();
 		if($scope.yearSelected != null && $scope.paramSelected != null)
 		{
-			$(".zoomable").html('Shift + Click on countries to compare').show();			
+			$(".mapInfo").html('Shift + Click on countries to compare').show();	
+			$(".mapInfo").css('background-color','lavender');				
 		}
 		 $scope.points = null;
 		 var populateData = "[\n"
@@ -246,7 +247,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
             if ($scope.points.length) 
 			{
-                $(".zoomable").html('The graphs are zoomable. Select the area to be zoomed in by click and drag of the mouse.').show();
+                $(".zoomleg").html('The graphs are zoomable. Select the area to be zoomed in by click and drag of the mouse.').show();
+                $(".zoomleg").css('background-color','lavender');	
                 $('#info0 .subheader0').html('<span class="subheading"><small><em>Shift + Click on map to compare countries</em></small></span>');
 
 				for(var i =0; i < $scope.points.length; i++)
@@ -1695,7 +1697,9 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 				$('#country-chart4').empty()
 				$('#country-chart5').empty()
 				$('#country-chart6').empty()
-				$(".zoomable").html('Shift + Click on countries to compare').show();
+				$(".mapInfo").html('Shift + Click on countries to compare').show();
+				$(".mapInfo").css('background-color','lavender');
+				$(".zoomleg").html('');				
 			}
 
 
