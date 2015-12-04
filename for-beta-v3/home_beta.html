@@ -61,21 +61,6 @@
 
 		//accordion
 		    var active = true;
-
-	    // $('#collapse-init').click(function () {
-	    //     if (active) {
-	    //         active = false;
-	    //         $('.panel-collapse').collapse('show');
-	    //         $('.panel-title').attr('data-toggle', '');
-	    //         $(this).text('Enable accordion behavior');
-	    //     } else {
-	    //         active = true;
-	    //         $('.panel-collapse').collapse('hide');
-	    //         $('.panel-title').attr('data-toggle', 'collapse');
-	    //         $(this).text('Disable accordion behavior');
-	    //     }
-	    // });
-	    
 	    $('#accordion').on('show.bs.collapse', function () {
 	        if (active) $('#accordion .in').collapse('hide');
 	    });
@@ -225,21 +210,22 @@
 
 	  <div class="tab-content">
 	    <div id="home" class="tab-pane fade in active">
-           <div class="body-text-font" style="margin:2px 20px;padding:10px;">
+           <div class="body-text-font" style="margin:2px 30px;padding:20px;">
   				<p class="intro">
-  				 !New World Urban Development application aims to provide complete visualization experience in the form of interactive graphs and map 
+  				 World Urban Development application aims to provide complete visualization experience in the form of interactive graphs and map 
   				 for all countries. Application offers detail on demand, zoom in feature and easy options to download the graph in multiple formats. 
   				 User would be able to analyze, compare and visualize urban development data for the past 6 decades.
   				</p>
   				
   				<p>
   				<span class="subheading">Map Based Visualization</span><br>
-  				Map based visualization provides a beautiful linking of data where users can select multiplle countries in world map one after another and visualize the link between the selected year and the historic urban development trend. 
+  				Map based visualization provides a beautiful linking of data where users can select multiplle countries in world map one after another and visualize the link between the selected year and the historic urban development trend. Users can select a particular year and a parameter from 14 most used urban development indices. A world map view is provided for required year. User can choose sequence of countries to compare them for historic period from 1960 to 2014 plotted aginst different parameters.
   				</p>
               <span class="subheading">Motion Visualization</span><br>
-          Dynamic motion charts based on bubble visualization, taking two parameters for comparison, which change over time with a built-in auto play feature to visualize the trend in urban development. It shows an interactive exploration and visualization of longitudinal multivariate data.
+          Dynamic motion charts based on bubble visualization, taking two parameters for comparison, which change over time with a built-in auto play feature to visualize the trend in urban development. Users can also control the auto play speed or they can manually slide through the years of interest. It shows an interactive exploration and visualization of longitudinal multivariate data in the form of bar chart and line chart.
+          The application allows to change the visualization color on demand.
           </p>
-          <iframe width="420" height="315" src="https://www.youtube.com/embed/aUbnaSkUlMk" frameborder="0" allowfullscreen></iframe>
+          <!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/aUbnaSkUlMk" frameborder="0" allowfullscreen></iframe> -->
   			 </div>
 	    </div>
 	    <div id="menu1" class="tab-pane fade">
@@ -352,8 +338,10 @@
 			            	<ul>
 			            		<li>Go to Visualizations Tab and select "One Parameter Visualisation" radio button </li>
 			            		<li>Choose required Year and a Parameter</li>
+			            		<img height="100px" width="600px"src="img/one_param.png"/>
 			            		<li>A world map would be displayed based on the selected parameter and year</li>
 			            		<li>Choose required Countries from the world map by holding Shift button and click</li>
+			            		<img height="300px" width="600px"src="img/multi-graph.png"/>
 			            		<li> 6 different parameters graphs are plotted.</li>
 			            	</ul>
 			            </div>
@@ -393,10 +381,11 @@
 			            <div class="panel-body">
 			               	<ul>
 			            		<li>Go to Visualizations tab and choose "Two Parameters"</li>
+			            			<img src="img/two_param.png" height="100px" width="750px">
 			            		<li>From the displayed 2 dimensional graph, select required parameters in X and Y axis</li>
-			            		<img height="400px" width="750px"src="img/motion_chart.png"/>
+			            		<img height="300px" width="600px"src="img/motion_chart.png"/>
 			            		<li>You can either play the grpah by clicking "Play" button or manually slide through</li>
-			            		<img height="100px" width="750px"src="img/play.png"/>
+			            		<img height="100px" width="600px"src="img/play.png"/>
 			            	</ul>
 
 			            </div>
@@ -407,16 +396,17 @@
 			        <div class="panel-heading">
 			             <h4 class="panel-title"
 			                 data-toggle="collapse"
-			                 data-target="#collapseThree">
+			                 data-target="#collapseFour">
 			                 How to Visualize Bar Graph
 			             </h4>
 			        </div>
-			        <div id="collapseThree" class="panel-collapse collapse">
+			        <div id="collapseFour" class="panel-collapse collapse">
 			            <div class="panel-body">
 			               	<ul>
 			            		<li>Go to Visualizations tab and choose "Two Parameters"</li>
+			            			<img src="img/two_param.png" height="100px" width="750px">
 			            		<li>Click the Bar Graph button</li>
-			            		<img height="400px" width="750px"src="img/barchart.png"/>
+			            		<img height="300px" width="600px"src="img/barchart.png"/>
 			            		<li>From the displayed 2 dimensional graph, select required parameters in X and Y axis</li>
 			            	</ul>
 
@@ -428,16 +418,17 @@
 			        <div class="panel-heading">
 			             <h4 class="panel-title"
 			                 data-toggle="collapse"
-			                 data-target="#collapseThree">
+			                 data-target="#collapseFive">
 			                 How to Visualize Line Graph
 			             </h4>
 			        </div>
-			        <div id="collapseThree" class="panel-collapse collapse">
+			        <div id="collapseFive" class="panel-collapse collapse">
 			            <div class="panel-body">
 			               	<ul>
 			            		<li>Go to Visualizations tab and choose "Two Parameters"</li>
-			            		<li>Click the Bar Graph button</li>
-			            		<img height="400px" width="750px"src="img/barchart.png"/>
+			            			<img src="img/two_param.png" height="100px" width="750px">
+			            		<li>Click the Line Graph button</li>
+			            		<img height="300px" width="600px"src="img/linechart.png"/>
 			            		<li>From the displayed graph, select required parameters Y axis</li>
 			            	</ul>
 
@@ -449,18 +440,16 @@
 			        <div class="panel-heading">
 			             <h4 class="panel-title"
 			                 data-toggle="collapse"
-			                 data-target="#collapseThree">
-			                 How to Visualize Motion Graph
+			                 data-target="#collapseSix">
+			                 How to Change Visulization Color
 			             </h4>
 			        </div>
-			        <div id="collapseThree" class="panel-collapse collapse">
+			        <div id="collapseSix" class="panel-collapse collapse">
 			            <div class="panel-body">
 			               	<ul>
-			            		<li>Go to Visualizations tab and choose "Two Parameters"</li>
+			            		<li>From the given visualization, select the color box</li>
+			            		<img src="img/color.png" height="300px" width="600px">
 			            		<li>From the displayed 2 dimensional graph, select required parameters in X and Y axis</li>
-			            		<img height="400px" width="750px"src="img/motion_chart.png"/>
-			            		<li>You can either play the grpah by clicking "Play" button or manually slide through</li>
-			            		<img height="100px" width="750px"src="img/play.png"/>
 			            	</ul>
 
 			            </div>
@@ -471,18 +460,17 @@
 			        <div class="panel-heading">
 			             <h4 class="panel-title"
 			                 data-toggle="collapse"
-			                 data-target="#collapseThree">
-			                 How to Visualize Motion Graph
+			                 data-target="#collapseSeven">
+			                 How to Highlight a Country in Any Graph
 			             </h4>
 			        </div>
-			        <div id="collapseThree" class="panel-collapse collapse">
+			        <div id="collapseSeven" class="panel-collapse collapse">
 			            <div class="panel-body">
 			               	<ul>
-			            		<li>Go to Visualizations tab and choose "Two Parameters"</li>
-			            		<li>From the displayed 2 dimensional graph, select required parameters in X and Y axis</li>
-			            		<img height="400px" width="750px"src="img/motion_chart.png"/>
-			            		<li>You can either play the grpah by clicking "Play" button or manually slide through</li>
-			            		<img height="100px" width="750px"src="img/play.png"/>
+			            		<li>In the displayed, visualization graph, hover over the grpah or select one</li>
+			            		<li>You can alternatively select the country name in check box</li>
+			            		<img height="300px" width="600px"src="img/select_country.png"/>
+			            		
 			            	</ul>
 
 			            </div>
