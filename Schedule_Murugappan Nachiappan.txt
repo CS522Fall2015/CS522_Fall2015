@@ -27,4 +27,4 @@ Create rich map and line chart juxtaposed view		8 hours					11/22
 
 Update webpage layout to match new features		4 hours					11/22
 
-
+Update webpage layout to match new features		4 hours					11/22
