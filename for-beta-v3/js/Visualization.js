@@ -1,672 +1,32 @@
-var myApp = angular.module('myApp',['ui.bootstrap']);
-
-myApp.controller('MyCtrl', function($scope, $http) {
-
-  $scope.countrySelected = [];
-  $scope.paramSelected = null;
-  $scope.countries = [];
-  $scope.params = [];
-  $scope.indicator_multi = null;
-  var checker = 0;
-  $scope.seriesCategories= [];
-  $scope.seriesData = [];
-
-  //to make sure that the page loads after the file has been paesed.
-  $http.get('js/finalFile.json')
-    .success(function(response)
-    {
-    });
-
-
-  //Read json file to extract country names and parameter names
-  jQuery.get('js/finalFile.json', function(data) 
-	{
-		$scope.jsonData = data;
-
-		data[0]["ParamData"].forEach(function(item)
-		{
-		  $scope.params.push(item["Indicator Name"]);
-		  
+$(document).ready(function(){
+		var charts = [];
+		$(".map").hide();
+		$(".motion").hide();
+		$(".zoomable").hide();
+		<!-- $(".container").legend.group.hide(); -->
+		$('input[type="radio"]').click(function(){
+			
+			if($(this).attr("value")=="oneParameter"){
+				$(".motion").hide();
+				$(".map").show();
+				if($('#year').length > 0 && $('#parameter').length > 0)
+					$(".zoomable").show();
+			}
+			else if($(this).attr("value")=="twoParameter"){
+				$(".map").hide();
+				$(".motion").show();
+				$(".zoomable").hide();
+			}
+			else{
+				$(".map").hide();
+				$(".motion").hide();
+				<!-- $(".zoomable").hide(); -->
+			}
 
 		});
-		
-		data.forEach(function(item)
-		{
-		  $scope.countries.push(item["Country Name"]);
-
-		});
-				
 	});
 
-
-	$scope.showChart = function(number)
-	{
-		$scope.countryData = []
-		$scope.paramData = []
-		
-		for(var i =0; i < $scope.countrySelected.length; i++)
-		{
-			$scope.jsonData.forEach(function(item) {
-
-				if(item["Country Name"] == $scope.countrySelected[i])
-				{
-					$scope.countryData.push(item);
-				}
-			});
-		}
-		for(var i = 0; i < $scope.countryData.length; i++)
-		{
-			$scope.countryData[i]["ParamData"].forEach(function(item) {
-
-			if(item["Indicator Name"] == $scope.paramSelected)
-				{
-					$scope.paramData.push(item["YearEncoding"][0]);
-				}
-			});
-		}
-		
-	
-		$scope.chartData = [];
-		
-		for(var key in $scope.paramData)
-		{	
-			var temporary = [];
-			var temp = $scope.paramData[key]
-			for(var kk in temp)
-			{
-				if(temp[kk] == null)
-						temporary.push(0);
-					else
-						temporary.push(temp[kk]);
-				
-			}
-			$scope.chartData.push(temporary);
-		}
-		
-		$scope.series = Object.keys($scope.paramData[0]);
-		$scope.seriesCategories = Object.keys($scope.paramData[0]);
-		
-		var trueData = "[\n" + "\t{\n" + "\t\t\"name\": \"Parameters\"," + "\n" + "\t\t\"data\": [" + $scope.series + "]\n\t},"
-
-		//preparing data for the graph
-		for(var i = 0; i < $scope.countrySelected.length; i++)
-		{
-			if($scope.countrySelected.length-i==1)
-				trueData += "\n\t{\n" + "\t\t\"name\": \"" + $scope.countrySelected[i] + "\",\n\t\t\"data\": [" + $scope.chartData[i] + "]\n\t}"
-			else
-				trueData += "\n\t{\n" + "\t\t\"name\": \"" + $scope.countrySelected[i] + "\",\n\t\t\"data\": [" + $scope.chartData[i] + "]\n\t},"
-		}
-		
-		trueData += "\n]"
-		var testData = JSON.parse(trueData);
-		
-		switch($scope.paramSelected)
-		{
-			case "Population density (people per sq. km of land area)":
-				$scope.indicator_multi = 'people per sq. km of land area';
-				break;
-			case "Population in largest city":
-				$scope.indicator_multi = 'Population in largest city';
-				break;
-			case "Population in the largest city (% of urban population)":
-				$scope.indicator_multi = '(%) of urban population';
-				break;
-			case "Population in urban agglomerations of more than 1 million":
-				$scope.indicator_multi = 'Population in urban agglomerations';
-				break;
-			case "Population in urban agglomerations of more than 1 million (% of total population)":
-				$scope.indicator_multi = '(%) of total population';
-				break;
-			case "Pump price for diesel fuel (US$ per liter)":
-				$scope.indicator_multi = 'US$ per liter';
-				break;
-			case "Pump price for gasoline (US$ per liter)":
-				$scope.indicator_multi = 'US$ per liter';
-				break;
-			case "Improved water source, urban (% of urban population with access)":
-				$scope.indicator_multi = '(%) of urban population with access';
-				break;
-			case "Improved sanitation facilities, urban (% of urban population with access)":
-				$scope.indicator_multi = '(%) of urban population with access';
-				break;
-			case "Urban poverty gap at national poverty lines (%)":
-				$scope.indicator_multi = 'total (%)';
-				break;
-			case "Urban poverty headcount ratio at national poverty lines (% of urban population)":
-				$scope.indicator_multi = '% of urban population';
-				break;
-			case "Urban population growth (annual %)":
-				$scope.indicator_multi = 'annual (%)';
-				break;
-			case "Urban population":
-				$scope.indicator_multi = 'Urban population';
-				break;
-			case "Urban population (% of total)":
-				$scope.indicator_multi = '(%) of total';
-				break;
-			default:
-				$scope.indicator_multi = 'Value';
-		}
-		
-		$scope.seriesData = [];
-		for(var i = 0; i < testData.length; i++)
-			{
-
-				if(i==0)
-					$scope.seriesCategories = testData[0]['data'];
-				else
-				{
-					$scope.seriesData[i-1]=testData[(i)];
-					
-					
-				}
-			}	
-			 $(".zoomable").show();	 
-		 if(number == 0)
-		 {
-		
-		 	$("#stackedBarChart").addClass('activeGraph');
-		 	$("#lineChart").removeClass('activeGraph');
-		 	$("#scatterPlot").removeClass('activeGraph');
-			 $('#container').highcharts({
-					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
-					chart: {
-						type: 'column',
-						zoomType: 'xy'
-					},
-					title: {
-						text: 'Multi-Country Comparison',
-						x: -20 //center
-					},
-					subtitle: {
-						text: $scope.paramSelected,
-						x: -20
-					},
-					xAxis: {
-						categories: $scope.seriesCategories,
-						title: {
-									//text: null
-								},
-						min: 0
-					},
-					yAxis: {
-						title: {
-							text: $scope.indicator_multi
-						},
-						plotLines: [{
-							value: 0,
-							width: 1,
-							color: '#808080'
-						}],
-						min: 0
-					},
-					tooltip: {
-						formatter: function() {
-								return '<b>'+ this.series.name +'</b><br/>'+
-								this.x +': '+ this.y;
-						}
-					},
-					legend: {
-						//align: 'right',
-						x: 0,
-						//verticalAlign: 'top',
-						y: 0,
-						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-						borderColor: '#CCC',
-						borderWidth: 1,
-						shadow: true
-					},
-					 plotOptions: {
-						column: {
-							stacking: 'normal',
-							dataLabels: {
-								enabled: false,
-								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-								style: {
-									textShadow: '0 0 3px black'
-								}
-							}
-						}
-					},
-					series: $scope.seriesData
-			});
-		 }
-		 else if(number == 1)
-		 {
-		 
-
-		 	$("#stackedBarChart").removeClass('activeGraph');
-		 	$("#lineChart").addClass('activeGraph');
-		 	$("#scatterPlot").removeClass('activeGraph');
-			 $('#container').highcharts({
-					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
-					chart: {
-						zoomType: 'xy'
-					},
-					title: {
-						text: 'Multi-Country Comparison',
-						x: -20 //center
-					},
-					subtitle: {
-						text: $scope.paramSelected,
-						x: -20
-					},
-					xAxis: {
-						categories: $scope.seriesCategories,
-						title: {
-									//text: null
-						},
-						min: 0
-					},
-					yAxis: {
-						title: {
-							text: $scope.indicator_multi
-						},
-						plotLines: [{
-							value: 0,
-							width: 1,
-							color: '#808080'
-						}],
-						min: 0
-					},
-					tooltip: {
-						shared:true
-					},
-					legend: {
-						//align: 'right',
-						x: 0,
-						//verticalAlign: 'top',
-						y: 0,
-						//floating: true,
-						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-						borderColor: '#CCC',
-						borderWidth: 1,
-						shadow: true
-					},
-					 plotOptions: {
-						line: {
-							//stacking: 'normal',
-							dataLabels: {
-								enabled: false,
-								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-								style: {
-									textShadow: '0 0 3px black'
-								}
-							},
-							marker: {
-										enabled: false
-									}
-						}
-					},
-					series: $scope.seriesData
-			});
-		 }
-		 else if(number == 2)
-		 {
-		 
-
-		 	$("#stackedBarChart").removeClass('activeGraph');
-		 	$("#lineChart").removeClass('activeGraph');
-		 	$("#scatterPlot").addClass('activeGraph');
-			$('#container').highcharts({
-					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
-					chart: {
-						type: 'scatter',
-						zoomType: 'xy'
-					},
-					title: {
-						text: 'Multi-Country Comparison',
-						x: -20 //center
-					},
-					subtitle: {
-						text: $scope.paramSelected,
-						x: -20
-					},
-					xAxis: {
-						categories: $scope.seriesCategories
-					},
-					yAxis: {
-						title: {
-							text: $scope.indicator_multi
-						},
-						plotLines: [{
-							value: 0,
-							width: 1,
-							color: '#808080'
-						}]
-					},
-					tooltip: {
-						formatter: function() {
-								return '<b>'+ this.series.name +'</b><br/>'+
-								this.x +': '+ this.y;
-						}
-					},
-					legend: {
-						//align: 'right',
-						x: 0,
-						//verticalAlign: 'top',
-						y: 0,
-						//floating: true,
-						backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-						borderColor: '#CCC',
-						borderWidth: 1,
-						shadow: true
-					},
-					 plotOptions: {
-						column: {
-							stacking: 'normal',
-							dataLabels: {
-								enabled: false,
-								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-								style: {
-									textShadow: '0 0 3px black'
-								}
-							},
-							marker: {
-										enabled: false
-									}
-						}
-					},
-					series: $scope.seriesData
-			}); 
-		 }
-	}
-	
-	
-	
- });
-
- 
-myApp.controller("jsonDataCtrl_single", function($scope, $http) {
-
-	$scope.countrySelected_single = null;
-	$scope.paramSelected_single = null;
-	$scope.countries_single = [];
-	$scope.params_single = [];
-	$scope.indicator_single = null;
-	var checker_single = 0
-	
-	  //to make sure that the page loads after the file has been paesed.
-	  $http.get('js/finalFile.json')
-		.success(function(response)
-		{
-		});
-	
-	
-	jQuery.get('js/finalFile.json', function(data) {
-		
-			
-	 	$scope.jsonData_single = data;
-
-	 	data[0]["ParamData"].forEach(function(item)
-	 	{
-	 		$scope.params_single.push(item["Indicator Name"]);
-			
-
-	 	});
-
-		
-	 	data.forEach(function(item)
-	 	{
-	 		$scope.countries_single.push(item["Country Name"]);
-
-	 	});
-		
-		
-	 });
-	
-	
-	$scope.showChart_single = function(number){
-
-		$scope.chartData_single = [];
- 		$(".zoomable").show();
-		$scope.jsonData_single.forEach(function(item) {
-		
-		var checker = 0;
-		
-		if(item["Country Name"] == $scope.countrySelected_single)
-			{
-				checker = 1;
-				$scope.countryData_single = item;
-			}
-		
-		});
-		
-		$scope.countryData_single["ParamData"].forEach(function(item) {
-
-			if(item["Indicator Name"] == $scope.paramSelected_single)
-			{
-				$scope.paramData_single = item["YearEncoding"][0];
-			}
-		});
-
-		for(key in $scope.paramData_single) {
-		    if($scope.paramData_single.hasOwnProperty(key)) {
-				
-				
-				if($scope.paramData_single[key] == null)
-						$scope.chartData_single.push(0);
-					else
-						$scope.chartData_single.push($scope.paramData_single[key]);
-				
-		    }
-		 }
-
-
-		$scope.series_single = Object.keys($scope.paramData_single);
-		
-		var firstNull = true
-		$scope.newSeries_single = []
-		$scope.newChartData_single = []
-
-		for( var i =0; i<$scope.chartData_single.length; i++)
-		{
-			if($scope.chartData_single[i]==0 && firstNull)
-			{
-
-				continue;
-				
-			}
-			else if($scope.chartData_single[i]!=0)
-			{
-				firstNull = false
-				$scope.newSeries_single.push($scope.series_single[i])
-				$scope.newChartData_single.push($scope.chartData_single[i])
-				
-			}
-			else
-			{
-				$scope.newSeries_single.push($scope.series_single[i])
-				$scope.newChartData_single.push($scope.chartData_single[i])
-			}
-				
-		}
-		
-		switch($scope.paramSelected_single)
-		{
-			case "Population density (people per sq. km of land area)":
-				$scope.indicator_single = 'people per sq. km of land area';
-				break;
-			case "Population in largest city":
-				$scope.indicator_single = 'Population in largest city';
-				break;
-			case "Population in the largest city (% of urban population)":
-				$scope.indicator_single = '(%) of urban population';
-				break;
-			case "Population in urban agglomerations of more than 1 million":
-				$scope.indicator_single = 'Population in urban agglomerations';
-				break;
-			case "Population in urban agglomerations of more than 1 million (% of total population)":
-				$scope.indicator_single = '(%) of total population';
-				break;
-			case "Pump price for diesel fuel (US$ per liter)":
-				$scope.indicator_single = 'US$ per liter';
-				break;
-			case "Pump price for gasoline (US$ per liter)":
-				$scope.indicator_single = 'US$ per liter';
-				break;
-			case "Improved water source, urban (% of urban population with access)":
-				$scope.indicator_single = '(%) of urban population with access';
-				break;
-			case "Improved sanitation facilities, urban (% of urban population with access)":
-				$scope.indicator_single = '(%) of urban population with access';
-				break;
-			case "Urban poverty gap at national poverty lines (%)":
-				$scope.indicator_single = 'total (%)';
-				break;
-			case "Urban poverty headcount ratio at national poverty lines (% of urban population)":
-				$scope.indicator_single = '% of urban population';
-				break;
-			case "Urban population growth (annual %)":
-				$scope.indicator_single = 'annual (%)';
-				break;
-			case "Urban population":
-				$scope.indicator_single = 'Urban population';
-				break;
-			case "Urban population (% of total)":
-				$scope.indicator_single = '(%) of total';
-				break;
-			default:
-				$scope.indicator_single = 'Value';
-		}
-		
-		var checker_single_country = document.getElementById('country');
-		var checker_single_parameter = document.getElementById('parameter');
-		
-		if($scope.countrySelected_single === '')
-		{
-				$("#container_single").empty()
-				$("#container_single").append("<br><p id=\"inner\" style=\"font-size:200%\">Please select a country!</p>")
-		}
-		else
-		{			
-			if( $scope.newSeries_single.length == 0)
-			{
-				if(checker_single == 1)
-				{
-					$("#container_single").empty()
-				}
-				$("#container_single").append("<br><p id=\"inner\" style=\"font-size:200%\">No Information to Display!</p>")
-				checker_single = 1
-				
-			}
-			else
-			{
-				if(number == 0)
-				{
-					
-					$("#lineChart_single").addClass('activeGraph');
-	 				$("#barChart_single").removeClass('activeGraph');
-					checker_single = 1
-					$('#container_single').highcharts({
-								chart: {
-										zoomType: 'xy'
-								},
-								title: {
-									text: $scope.paramSelected_single,
-									x: -20 //center
-								},
-								subtitle: {
-									text: 'For ' + $scope.countrySelected_single,
-									x: -20
-								},
-								xAxis: {
-									categories: $scope.newSeries_single,
-									title: {
-										//text: null
-									},
-									min: 0
-								},
-								yAxis: {
-									title: {
-										text: $scope.indicator_single
-									},
-									plotLines: [{
-										value: 0,
-										width: 1,
-										color: '#808080'
-									}],
-									min: 0
-								},
-								tooltip: {
-									valueSuffix: ' %'
-								},
-								legend: {
-									layout: 'vertical',
-									//align: 'right',
-									//verticalAlign: 'middle',
-									borderWidth: 0,
-									x: 0,
-									y: 0
-								},
-								series: [{
-									name: $scope.countrySelected_single,
-									data: $scope.newChartData_single
-								}]
-					});
-				}
-				else
-				{
-				
-					$("#lineChart_single").removeClass('activeGraph');
-	 				$("#barChart_single").addClass('activeGraph');
-					checker_single = 1
-					$('#container_single').highcharts({
-								chart: {
-											type: 'column',
-											zoomType: 'xy'
-								},
-								title: {
-									text: $scope.paramSelected_single,
-									x: -20 //center
-								},
-								subtitle: {
-									text: 'For ' + $scope.countrySelected_single,
-									x: -20
-								},
-								xAxis: {
-									categories: $scope.newSeries_single,
-									title: {
-										//text: null
-									},
-									min: 0
-								},
-								yAxis: {
-									title: {
-										text: $scope.indicator_single
-									},
-									plotLines: [{
-										value: 0,
-										width: 1,
-										color: '#808080'
-									}],
-									min: 0
-								},
-								tooltip: {
-									valueSuffix: ' %'
-								},
-								legend: {
-									layout: 'vertical',
-									//align: 'right',
-									//verticalAlign: 'middle',
-									borderWidth: 0,
-									x: 0,
-									y: 0
-								},
-								series: [{
-									name: $scope.countrySelected_single,
-									data: $scope.newChartData_single
-								}]
-					});
-					
-				}
-			}
-		}
-	};
-
-
-});
-
+var myApp = angular.module('myApp',['ui.bootstrap']);
 
 myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
@@ -677,8 +37,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 	$scope.years = [];
 	$scope.indicator = null;
 	$scope.seriesData = undefined;
-	
-	
+	var charts = [];
+	var options = undefined;
 	
 	  //to make sure that the page loads after the file has been paesed.
 	  $http.get('js/finalFile.json')
@@ -728,7 +88,10 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 		$('#info #flag').attr('class', '');
 		$('#info h3').html('');
 		$('#country-chart').empty();
- 
+		if($scope.yearSelected != null && $scope.paramSelected != null)
+		{
+			$(".zoomable").html('Shift + Click on countries to compare').show();			
+		}
 		 $scope.points = null;
 		 var populateData = "[\n"
 		 $scope.jsonData.forEach(function(data){
@@ -804,45 +167,59 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 		{
 			case "Population density (people per sq. km of land area)":
 				$scope.indicator = 'people per sq. km of land area';
+				$scope.paramSelectedTrim = 'Population density'
 				break;
 			case "Population in largest city":
 				$scope.indicator = 'Population in largest city';
+				$scope.paramSelectedTrim = 'Population in largest city';
 				break;
 			case "Population in the largest city (% of urban population)":
 				$scope.indicator = '(%) of urban population';
+				$scope.paramSelectedTrim = 'Population in the largest city';
 				break;
 			case "Population in urban agglomerations of more than 1 million":
 				$scope.indicator = 'Population in urban agglomerations';
+				$scope.paramSelectedTrim = 'Population in urban agglomerations';
 				break;
 			case "Population in urban agglomerations of more than 1 million (% of total population)":
 				$scope.indicator = '(%) of total population';
+				$scope.paramSelectedTrim = 'Population in urban agglomerations';
 				break;
 			case "Pump price for diesel fuel (US$ per liter)":
 				$scope.indicator = 'US$ per liter';
+				$scope.paramSelectedTrim = 'Pump price for diesel fuel';
 				break;
 			case "Pump price for gasoline (US$ per liter)":
 				$scope.indicator = 'US$ per liter';
+				$scope.paramSelectedTrim = 'Pump price for gasoline';
 				break;
 			case "Improved water source, urban (% of urban population with access)":
 				$scope.indicator = '(%) of urban population with access';
+				$scope.paramSelectedTrim = 'Improved water source, urban';
 				break;
 			case "Improved sanitation facilities, urban (% of urban population with access)":
 				$scope.indicator = '(%) of urban population with access';
+				$scope.paramSelectedTrim = 'Improved sanitation facilities, urban';
 				break;
 			case "Urban poverty gap at national poverty lines (%)":
 				$scope.indicator = 'total (%)';
+				$scope.paramSelectedTrim = 'Urban poverty gap at national poverty lines';
 				break;
 			case "Urban poverty headcount ratio at national poverty lines (% of urban population)":
 				$scope.indicator = '% of urban population';
+				$scope.paramSelectedTrim = 'Urban poverty headcount ratio at national poverty lines';
 				break;
 			case "Urban population growth (annual %)":
 				$scope.indicator = 'annual (%)';
+				$scope.paramSelectedTrim = 'Urban population growth';
 				break;
 			case "Urban population":
 				$scope.indicator = 'Urban population';
+				$scope.paramSelectedTrim = 'Urban population';
 				break;
 			case "Urban population (% of total)":
 				$scope.indicator = '(%) of total';
+				$scope.paramSelectedTrim = 'Urban population';
 				break;
 			default:
 				$scope.indicator = 'Value';
@@ -855,25 +232,22 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
             this.id = this.properties['hc-key']; // for Chart.get()
             this.flag = this.id.replace('UK', 'GB').toLowerCase();
         });
-
+		
         // Wrap point.select to get to the total selected $scope.points
         Highcharts.wrap(Highcharts.Point.prototype, 'select', function (proceed) {
 
             proceed.apply(this, Array.prototype.slice.call(arguments, 1));
 			
             $scope.points = mapChart.getSelectedPoints();
-			$scope.countryData = []
-			$scope.paramData = []
-            if ($scope.points.length) {
-                if ($scope.points.length === 1) {
-                    $('#info #flag').attr('class', 'flag ' + $scope.points[0].flag);
-                    $('#info h3').html($scope.points[0].name);
-                } else {
-                    $('#info #flag').attr('class', 'flag');
-                    $('#info h3').html('Multi-Country Comparison');
+			$scope.countryData = [];
+			$scope.paramData = [];
+			$scope.testSeriesName = [];
+			$scope.testSeriesData = [];
 
-                }
-                $('#info .subheader').html('<span class="subheading"><small><em>Shift + Click on map to compare countries</em></small></span>');
+            if ($scope.points.length) 
+			{
+                $(".zoomable").html('The graphs are zoomable. Select the area to be zoomed in by click and drag of the mouse.').show();
+                $('#info0 .subheader0').html('<span class="subheading"><small><em>Shift + Click on map to compare countries</em></small></span>');
 
 				for(var i =0; i < $scope.points.length; i++)
 				{
@@ -885,140 +259,1444 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 						}
 					});
 				}
-				for(var i = 0; i < $scope.countryData.length; i++)
-				{
-					$scope.countryData[i]["ParamData"].forEach(function(item) {
+				
+				var impParameter = ["Population density (people per sq. km of land area)","Population in largest city", "Population in the largest city (% of urban population)", "Population in urban agglomerations of more than 1 million", "Improved water source, urban (% of urban population with access)", "Urban population growth (annual %)", "Urban population", "Urban population (% of total)"];
+				//make unselected parameter list 
+				impParameter.forEach(function(item) {
 
-					if(item["Indicator Name"] == $scope.paramSelected)
+					if(item != $scope.paramSelected)
 						{
-							$scope.paramData.push(item["YearEncoding"][0]);
+															
+							$scope.testSeriesName.push(item);
 						}
-					});
-				}
-				
-				
-				
-				$scope.chartData = [];
-		
-				for(var key in $scope.paramData)
-				{	
-					var temporary = [];
-					var temp = $scope.paramData[key]
-					for(var kk in temp)
-					{
-						if(temp[kk] == null)
-								temporary.push(0);
-							else
-								temporary.push(temp[kk]);
 						
-					}
-					$scope.chartData.push(temporary);
-				}
-				$scope.series = Object.keys($scope.paramData[0]);
-				$scope.seriesCategories = Object.keys($scope.paramData[0]);
-				
-				var trueData = "[\n" + "\t{\n" + "\t\t\"name\": \"Parameters\"," + "\n" + "\t\t\"data\": [" + $scope.series + "]\n\t},"
-
-				//preparing data for the graph
-				for(var i = 0; i < $scope.points.length; i++)
-				{
-					if($scope.points.length-i==1)
-						trueData += "\n\t{\n" + "\t\t\"name\": \"" + $scope.points[i]["name"] + "\",\n\t\t\"data\": [" + $scope.chartData[i] + "]\n\t}"
-					else
-						trueData += "\n\t{\n" + "\t\t\"name\": \"" + $scope.points[i]["name"] + "\",\n\t\t\"data\": [" + $scope.chartData[i] + "]\n\t},"
-				}
-				
-				trueData += "\n]"
-				var testData = JSON.parse(trueData);
-								
-				$scope.seriesData = [];
-				for(var i = 0; i < testData.length; i++)
-					{
-
-						if(i==0)
-							$scope.seriesCategories = testData[0]['data'];
-						else
-						{
-							$scope.seriesData[i-1]=testData[(i)];
-							
-							
-						}
-					}
-				
-				$('#country-chart').highcharts({
-						colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
-						chart:{
-							typr:'StockChart',
-							height: 350,
-                            spacingLeft: 0,
-							zoomType: 'xy'
-						},
-						rangeSelector : {
-							selected : 1
-						},
-						title: {
-							text: $scope.paramSelected,
-							text:"",
-							//x: -20 
-						},
-						subtitle: {
-							text: $scope.paramSelected,
-							x: -20
-						},
-						xAxis: {
-                            //tickPixelInterval: 50,
-                            crosshair: true,
-							categories: $scope.years,
-							reversed:false
-                        },
-						yAxis: {
-							
-							title: {
-								text:$scope.indicator
-							},
-							plotLines: [{
-								value: 0,
-								width: 1,
-								color: '#808080'
-							}]
-						},
-						tooltip: {
-							shared:true
-						},
-						legend: {
-							x: 0,
-							y: 0,
-							backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-							borderColor: '#CCC',
-							borderWidth: 1,
-							shadow: true
-						},
-						 plotOptions: {
-							line: {
-								//stacking: 'normal',
-								dataLabels: {
-									enabled: false,
-									color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-									style: {
-										textShadow: '0 0 3px black'
-									}
-									
-								},
-								marker: {
-										enabled: false
-									}
-							
-							}
-						},
-						series: $scope.seriesData
 				});
 				
-            } else {
-                $('#info #flag').attr('class', '');
-                $('#info h3').html('');
-                $('#info .subheader').html('Click countries to view history');
-                $('#country-chart').empty();
-            }
+				var extractData = function(countryData, paramSelected)
+									{
+										paramData = [];
+										for(var i = 0; i < countryData.length; i++)
+										{
+											countryData[i]["ParamData"].forEach(function(item) {
+
+											if(item["Indicator Name"] == paramSelected)
+												{
+													paramData.push(item["YearEncoding"][0]);
+												}
+											});
+										}
+										return paramData;
+										
+									}
+				
+				var prepareData = function(paramData, points)
+				{
+					$scope.chartData = [];
+					
+					
+					for(var key in paramData)
+						{	
+							var temporary = [];
+							var temp = paramData[key]
+							for(var kk in temp)
+							{
+								if(temp[kk] == null)
+										temporary.push(0);
+									else
+										temporary.push(temp[kk]);
+								
+							}
+							$scope.chartData.push(temporary);
+						}
+						$scope.series = Object.keys(paramData[0]);
+						$scope.seriesCategories = Object.keys(paramData[0]);
+						
+						var trueData = "[\n" + "\t{\n" + "\t\t\"name\": \"Parameters\"," + "\n" + "\t\t\"data\": [" + $scope.series + "]\n\t},"
+
+						//preparing data for the graph
+						for(var i = 0; i < points.length; i++)
+						{
+							if(points.length-i==1)
+								trueData += "\n\t{\n" + "\t\t\"name\": \"" + points[i]["name"] + "\",\n\t\t\"data\": [" + $scope.chartData[i] + "]\n\t}"
+							else
+								trueData += "\n\t{\n" + "\t\t\"name\": \"" + points[i]["name"] + "\",\n\t\t\"data\": [" + $scope.chartData[i] + "]\n\t},"
+						}
+						
+						trueData += "\n]"
+						var testData = JSON.parse(trueData);
+										
+						seriesData = [];
+						for(var i = 0; i < testData.length; i++)
+							{
+
+								if(i==0)
+									seriesCategories = testData[0]['data'];
+								else
+								{
+									seriesData[i-1]=testData[(i)];
+									
+									
+								}
+							}
+							return seriesData
+				}
+				
+				$scope.paramData = extractData($scope.countryData, $scope.paramSelected)
+				$scope.seriesData = prepareData($scope.paramData, $scope.points)				
+				
+				    /**
+					 * Synchronize zooming through the setExtremes event handler.
+					 */
+					function syncExtremes(e) {
+						var thisChart = this.chart;
+
+						if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
+							Highcharts.each(Highcharts.charts, function (chart) {
+								if (chart !== thisChart && chart.container.id != 'highcharts-0') {
+									console.log(chart.xAxis[0].setExtremes)
+									if (chart.xAxis[0].setExtremes) { // It is null while updating
+										chart.xAxis[0].setExtremes(e.min, e.max, undefined, false, { trigger: 'syncExtremes' });
+									}
+								}
+							});
+						}
+					}
+				
+				function syncTooltip(container, p) {
+					var i = 0;
+					
+					for (; i < charts.length; i++) {
+						var tooltipData = [];
+						if (container.id != charts[i].container.id) {
+							if(charts[i].tooltip.shared) {
+									for(var j = 0; j < charts[i].series.length; j++)
+									{
+										tooltipData.push(charts[i].series[j].data[p+1])
+									}
+									
+									charts[i].tooltip.refresh(tooltipData);
+									
+							}
+							else {
+									charts[i].tooltip.refresh(tooltipData);
+								
+							}
+						}
+					}
+				}
+				
+				function syncTooltipHide(container, p) {
+					var i = 0;
+					
+					for (; i < charts.length; i++) {
+
+						if (container.id != charts[i].container.id) {
+							if(charts[i].tooltip.shared) {								
+									charts[i].pointer.reset();
+							}
+							else {
+									charts[i].pointer.reset();
+							}
+						}
+					}
+				}
+				
+				
+				if ($scope.points.length === 1) {
+					$('#info0').attr('class', '');	
+					$('#header0').html('');
+				} else {
+					$('#info0').attr('class', '');
+					$('#header0').html('');
+
+				}
+				
+				options = {
+					plotOptions: {
+						series: {
+							point: {
+								events: {
+									mouseOver: function () {
+										//for(var i = 0; i < this.series.length; i++)
+										syncTooltip(this.series.chart.container, this.x - 1);
+									},
+									mouseOut: function() {
+										syncTooltipHide(this.series.chart.container, this.x - 1);
+									}
+								}
+							}
+						}
+					}
+				};
+				
+				charts[0] = new Highcharts.Chart($.extend(true, {}, options, {
+					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+					chart:{
+						renderTo: 'country-chart0',
+						height: 250,
+						spacingLeft: 0,
+						zoomType: 'xy'
+					},
+					rangeSelector : {
+						selected : 1
+					},
+					title: {
+						text:"",
+					},
+					subtitle: {
+						text: $scope.paramSelectedTrim,
+						x: -15
+					},
+					xAxis: {
+						crosshair: true,
+						categories: $scope.years,
+						reversed:false
+					},
+					yAxis: {
+						
+						title: {
+							text:$scope.indicator
+						},
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#808080'
+						}]
+					},
+					tooltip: {
+						shared:true
+					},
+					legend: {
+						enabled:false
+					},
+					 // plotOptions: {
+						// line: {
+							// //stacking: 'normal',
+							// dataLabels: {
+								// enabled: false,
+								// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+								// style: {
+									// textShadow: '0 0 3px black'
+								// }
+								
+							// },
+							// marker: {
+									// enabled: false
+								// }
+												
+						// }
+					// },
+					series: $scope.seriesData
+				}));
+					
+				//console.log($scope.seriesData);
+				//making data for all other parameters
+				for(var i =0; i < 6; i++)
+				{
+					switch($scope.testSeriesName[i])
+					{
+						case "Population density (people per sq. km of land area)":
+							$scope.paramData = extractData($scope.countryData, "Population density (people per sq. km of land area)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = 'people per sq. km of land';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Population density',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+
+									},
+									legend: {
+										enabled:false
+
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+											
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Population in largest city":
+							$scope.paramData = extractData($scope.countryData, "Population in largest city");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = 'Population in largest city';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Population in largest city',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Population in the largest city (% of urban population)":
+							$scope.paramData = extractData($scope.countryData, "Population in the largest city (% of urban population)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = '(%) of urban population';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Population in the largest city',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Population in urban agglomerations of more than 1 million":
+							$scope.paramData = extractData($scope.countryData, "Population in urban agglomerations of more than 1 million");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = 'Population in urban agglomerations';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Population in urban agglomerations',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Population in urban agglomerations of more than 1 million (% of total population)":
+							$scope.paramData = extractData($scope.countryData, "Population in urban agglomerations of more than 1 million (% of total population)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = '(%) of total population';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Population in urban agglomerations',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Pump price for diesel fuel (US$ per liter)":
+							$scope.paramData = extractData($scope.countryData, "Pump price for diesel fuel (US$ per liter)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = 'US$ per liter';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Pump price for diesel fuel',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Pump price for gasoline (US$ per liter)":
+							$scope.paramData = extractData($scope.countryData, "Pump price for gasoline (US$ per liter)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = 'US$ per liter';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Pump price for gasoline',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Improved water source, urban (% of urban population with access)":
+							$scope.paramData = extractData($scope.countryData, "Improved water source, urban (% of urban population with access)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = '(%) of urban population with access';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Improved water source',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Improved sanitation facilities, urban (% of urban population with access)":
+							$scope.paramData = extractData($scope.countryData, "Improved sanitation facilities, urban (% of urban population with access)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = '(%) of urban population with access';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Improved sanitation facilities',
+										x: -15
+									},
+									xAxis: {
+										//tickPixelInterval: 50,
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							break;
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+						case "Urban poverty gap at national poverty lines (%)":
+							$scope.paramData = extractData($scope.countryData, "Urban poverty gap at national poverty lines (%)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = 'total (%)';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Urban poverty gap',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Urban poverty headcount ratio at national poverty lines (% of urban population)":
+							$scope.paramData = extractData($scope.countryData, "Urban poverty headcount ratio at national poverty lines (% of urban population)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = '% of urban population';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Urban poverty headcount ratio at national poverty lines',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Urban population growth (annual %)":
+							$scope.paramData = extractData($scope.countryData, "Urban population growth (annual %)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = 'annual (%)';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Urban population growth',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Urban population":
+							$scope.paramData = extractData($scope.countryData, "Urban population");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = 'Urban population';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Urban population',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
+										title: {
+											text:$scope.indicator
+										},
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
+							}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						case "Urban population (% of total)":
+							$scope.paramData = extractData($scope.countryData, "Urban population (% of total)");
+							$scope.seriesData = prepareData($scope.paramData, $scope.points);
+							$scope.indicator = '(%) of total';
+							if($scope.points)
+							{
+								if ($scope.points.length === 1) {
+									$('#info' + (i+1)).attr('class', '');	
+									$('#header' + (i+1)).html('');
+								} else {
+									$('#info' + (i+1)).attr('class', '');
+									$('#header' + (i+1)).html('');
+
+								}
+								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
+										colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+										chart:{
+											renderTo: 'country-chart' + (i+1),
+											height: 250,
+											spacingLeft: 0,
+											zoomType: 'xy'
+										},
+										rangeSelector : {
+											selected : 1
+										},
+										title: {
+											text:"",
+										},
+										subtitle: {
+											text: 'Urban population',
+											x: -15
+										},
+										xAxis: {
+											crosshair: true,
+											categories: $scope.years,
+											reversed:false
+										},
+										yAxis: {
+											
+											title: {
+												text:$scope.indicator
+											},
+											plotLines: [{
+												value: 0,
+												width: 1,
+												color: '#808080'
+											}]
+										},
+										tooltip: {
+											shared:true
+										},
+										legend: {
+											enabled:false
+										},
+										 // plotOptions: {
+											// line: {
+												// //stacking: 'normal',
+												// dataLabels: {
+													// enabled: false,
+													// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+													// style: {
+														// textShadow: '0 0 3px black'
+													// }
+													
+												// },
+												// marker: {
+														// enabled: false
+													// }
+											
+											// }
+										// },
+										series: $scope.seriesData
+								}));
+							}
+							else {
+								$('#info' + (i+1)).attr('class', '');
+								$('#info'+ (i+1)).html('');
+								$('#header' + (i+1)).html('');
+								$('#info'+ (i+1)).html('Click countries to view history');
+								$('.subheader' + (i+1)).html('Click countries to view history');
+								$('#country-chart' + (i+1)).empty();
+							}
+							break;
+						default:
+							$scope.indicator = 'Value';
+						
+					}
+				}
+					
+			} 
+			else {
+				$('#info0').attr('class', '');
+				$('#info1').attr('class', '');
+				$('#info2').attr('class', '');
+				$('#info').attr('class', '');
+				$('#header0').html('');
+				$('#header1').html('');
+				$('#header2').html('');
+				$('#header3').html('');
+				$('#header4').html('');
+				$('#header5').html('');
+				$('#header6').html('');			
+				$('#subheader0').html('');
+				$('#subheader1').html('');
+				$('#subheader2').html('');
+				$('#subheader3').html('');
+				$('#subheader4').html('');
+				$('#subheader5').html('');
+				$('#subheader6').html('');
+				$('#country-chart0').empty()
+				$('#country-chart1').empty()
+				$('#country-chart2').empty()
+				$('#country-chart3').empty()
+				$('#country-chart4').empty()
+				$('#country-chart5').empty()
+				$('#country-chart6').empty()
+				$(".zoomable").html('Shift + Click on countries to compare').show();
+			}
 
 
 
@@ -1027,7 +1705,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
         // Initiate the map chart
         mapChart = $('#container_map').highcharts('Map', {
 			color: ['#e0f3db', '#a8ddb5', '#43a2ca'],
-            title : {
+			title:{text:''},
+            subtitle : {
                 text : $scope.yearSelected +": " + $scope.paramSelected
             },
             mapNavigation: {
@@ -1052,7 +1731,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 				
 		        // Explicitly tell the width and height of a chart
 		        width: null,
-		        height: 350
+		        height: 270
 		},
 
             // tooltip: {
@@ -1084,7 +1763,5 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
             }]
         }).highcharts();
 
-		if($scope.paramSelected != null && $scope.yearSelected != null) 
-			$('#info .subheader').html('Click countries to view history');
 	 }
 });
