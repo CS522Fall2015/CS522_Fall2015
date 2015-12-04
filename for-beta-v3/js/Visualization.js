@@ -87,11 +87,14 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 		 
 		$('#info #flag').attr('class', '');
 		$('#info h3').html('');
-		$('#country-chart').empty();
-		$('#info0').attr('class', '');
-		$('#info1').attr('class', '');
-		$('#info2').attr('class', '');
-		$('#info').attr('class', '');
+		$('#country-chart0').empty()
+		$('#country-chart1').empty()
+		$('#country-chart2').empty()
+		$('#country-chart3').empty()
+		$('#country-chart4').empty()
+		$('#country-chart5').empty()
+		$('#country-chart6').empty()
+		$(".zoomleg").html('');		
 		if($scope.yearSelected != null && $scope.paramSelected != null)
 		{
 			$(".mapInfo").html('Shift + Click on countries to compare').show();	
