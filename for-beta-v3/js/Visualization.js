@@ -448,7 +448,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 				};
 				
 				charts[0] = new Highcharts.Chart($.extend(true, {}, options, {
-					colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+					colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 					chart:{
 						renderTo: 'country-chart0',
 						height: 250,
@@ -528,7 +528,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -613,7 +613,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -697,7 +697,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -780,7 +780,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -864,7 +864,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -947,7 +947,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -1030,7 +1030,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -1113,7 +1113,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -1196,7 +1196,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -1280,7 +1280,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -1363,7 +1363,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -1446,7 +1446,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -1529,7 +1529,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-									colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
 									chart:{
 										renderTo: 'country-chart' + (i+1),
 										height: 250,
@@ -1612,63 +1612,63 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 								}
 								charts[i+1] = new Highcharts.Chart($.extend(true, {}, options, {
-										colors: ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f'],
-										chart:{
-											renderTo: 'country-chart' + (i+1),
-											height: 250,
-											spacingLeft: 0,
-											zoomType: 'xy'
-										},
-										rangeSelector : {
-											selected : 1
-										},
+									colors: ['#66c2a5','#fc8d62','#8da0ff','#e78ac3','#fdb462'],
+									chart:{
+										renderTo: 'country-chart' + (i+1),
+										height: 250,
+										spacingLeft: 0,
+										zoomType: 'xy'
+									},
+									rangeSelector : {
+										selected : 1
+									},
+									title: {
+										text:"",
+									},
+									subtitle: {
+										text: 'Urban population',
+										x: -15
+									},
+									xAxis: {
+										crosshair: true,
+										categories: $scope.years,
+										reversed:false
+									},
+									yAxis: {
+										
 										title: {
-											text:"",
+											text:$scope.indicator
 										},
-										subtitle: {
-											text: 'Urban population',
-											x: -15
-										},
-										xAxis: {
-											crosshair: true,
-											categories: $scope.years,
-											reversed:false
-										},
-										yAxis: {
-											
-											title: {
-												text:$scope.indicator
-											},
-											plotLines: [{
-												value: 0,
-												width: 1,
-												color: '#808080'
-											}]
-										},
-										tooltip: {
-											shared:true
-										},
-										legend: {
-											enabled:false
-										},
-										 // plotOptions: {
-											// line: {
-												// //stacking: 'normal',
-												// dataLabels: {
-													// enabled: false,
-													// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-													// style: {
-														// textShadow: '0 0 3px black'
-													// }
-													
-												// },
-												// marker: {
-														// enabled: false
-													// }
-											
-											// }
-										// },
-										series: $scope.seriesData
+										plotLines: [{
+											value: 0,
+											width: 1,
+											color: '#808080'
+										}]
+									},
+									tooltip: {
+										shared:true
+									},
+									legend: {
+										enabled:false
+									},
+									 // plotOptions: {
+										// line: {
+											// //stacking: 'normal',
+											// dataLabels: {
+												// enabled: false,
+												// color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+												// style: {
+													// textShadow: '0 0 3px black'
+												// }
+												
+											// },
+											// marker: {
+													// enabled: false
+												// }
+										
+										// }
+									// },
+									series: $scope.seriesData
 								}));
 							}
 							else {
