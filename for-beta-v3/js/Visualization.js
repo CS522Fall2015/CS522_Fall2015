@@ -88,6 +88,10 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 		$('#info #flag').attr('class', '');
 		$('#info h3').html('');
 		$('#country-chart').empty();
+		$('#info0').attr('class', '');
+		$('#info1').attr('class', '');
+		$('#info2').attr('class', '');
+		$('#info').attr('class', '');
 		if($scope.yearSelected != null && $scope.paramSelected != null)
 		{
 			$(".mapInfo").html('Shift + Click on countries to compare').show();	
@@ -1734,7 +1738,7 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 		        spacingRight: 0,
 				
 		        // Explicitly tell the width and height of a chart
-		        width: null,
+		        // width: ,
 		        height: 270
 		},
 
