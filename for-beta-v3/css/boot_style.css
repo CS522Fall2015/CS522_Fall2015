@@ -51,3 +51,6 @@
     margin:3px;
     border-radius: 10px;
   }
+  .panel-title:hover {
+     cursor: pointer;
+}
