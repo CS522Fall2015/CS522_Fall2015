@@ -81,6 +81,15 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 
 	 	});
 		
+		$scope.revYear = [];
+		
+		var rev = $scope.years.length - 1;
+		while(rev >= 0)
+		{
+			$scope.revYear.push($scope.years[rev]);
+			rev--;
+		}
+		
 	 });
 	 
 	 $scope.createData = function(){
