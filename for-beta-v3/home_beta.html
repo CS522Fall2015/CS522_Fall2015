@@ -29,7 +29,7 @@
     <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>  
 
   <style type="text/css">
-  body{
+    body{
   font-family: Abel; 
   }
 
@@ -51,19 +51,19 @@
 	}
 	#container_map {
 		float: left;
-		height: 340px; 
-		width: 700px; 
+		height: 290px; 
+		width: 500px; 
 		overflow: hidden;
 		padding-left: 20px 
 	}
 	#info0{
 		float: left;
 		height: 300px;
-/*		padding-left: 20px;
-		padding-right: 20px;*/
+		padding-left: 20px;
+		padding-right: 20px;
 		margin: -4 0 0 0;
 		overflow: hidden;
-		width: 20%;
+		width: 27%;
 	}
 	#info0 h3 {
 		display: inline;
@@ -80,11 +80,11 @@
 	#info1 {
 		float: left;
 		height: 300px;
-	/*	padding-left: 20px;
-		padding-right: 20px;*/
+		padding-left: 20px;
+		padding-right: 20px;
 		margin:  -4 0 0 40px;
 		overflow: hidden;
-		width: 20%;
+		width: 27%;
 	}
 	#info1 h3 {
 		display: inline;
@@ -154,7 +154,6 @@
           border-bottom-color: transparent;
           } 
 
-
   </style>
   </head>
 
@@ -199,7 +198,7 @@
 					<input style="margin-left: 20px" type="radio" name="oneParameter" id="twoParameter" value="twoParameter"> Compare Two Parameter
 			</div>
 			
-            <div id="mapbox"class="map" style="margin-top:6px;height:79%;width:101%;padding:10px 5px" ng-controller="jsonMapCtrl">
+            <div id="mapbox"class="map" style="margin-top:3px;height:79%;width:101%;padding:10px 5px" ng-controller="jsonMapCtrl">
 				<div id="wrapper1">
 					<div>
 						<span class="subheading">Choose Year</span>
