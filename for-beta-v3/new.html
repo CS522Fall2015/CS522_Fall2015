@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>World Urban Development Visualization</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+      <!-- Begin Css/js files for vertical tab-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/boot_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!-- End of Css/js files for vertical tab-->
+
+    <!-- JS files for single/multi country visualizations-->
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/motionChart.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+  <script src="js/test.js"></script>
+    <!-- End of JS files for single/multi country visualizations-->
+
+    <!-- JS files for single/multi country visualizations-->
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>  
+
+    <script>
+      $(document).ready(function(){
+        var charts = [];
+        $(".map").hide();
+        $(".motion").hide();
+        $(".zoomable").hide();
+        <!-- $(".container").legend.group.hide(); -->
+        $('input[type="radio"]').click(function(){
+          
+          if($(this).attr("value")=="oneParameter"){
+            $(".motion").hide();
+            $(".map").show();
+            
+          }
+          else if($(this).attr("value")=="twoParameter"){
+            $(".map").hide();
+            $(".motion").show();
+            $(".zoomable").hide();
+          }
+          else{
+            $(".map").hide();
+            $(".motion").hide();
+            <!-- $(".zoomable").hide(); -->
+          }
+        });
+        
+        $('#container-chart0').mouseover(function(){
+          $('#container-chart1').tooltip.show();
+        });
+      });
+    </script>
+</head>
+<body>
+<style>
+ul li .active{
+  background-color: orange;
+}
+.tab-pane, .nav-tabs{
+  margin:10px;
+  padding:10px;
+}
+</style>
+<div class="horizontal_tab" style="width:99%">
+  <ul class="nav nav-tabs nav-justified">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1">Visualizations</a></li>
+    <li><a data-toggle="tab" href="#menu2">Help</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      1
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      2
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      3
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

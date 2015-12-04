@@ -1,0 +1,53 @@
+     body {
+  line-height: 2.0;
+}
+      div#siteHeader {
+        text-align: center;
+        color: #5A55A3;
+      }
+      .subheading{
+        color:#5A55A3;
+        font-weight: bold;
+        padding:3px;
+        margin:3px;
+        border-radius: 10px;
+        background-color: lavender;
+      }
+      .btn-spacing {
+        margin: 0 20px;
+      }
+	  .body-text-font{
+		    color:#5A55A3;
+	  }
+        .activeGraph{
+      background-color: #484482;
+    }
+    #comparisonButtons{
+      margin-left: 321px;
+      margin-top:-55px;
+    }
+    .zoomleg{
+    font-style: italic;
+    margin-left:298px;
+    border-radius: 10px;
+    }
+    #info{
+      float:right;
+      margin-right:-73px;
+      margin-top:-372px;
+    }
+	.instructions{
+      font-style: italic;
+    }
+  #mapbox{
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:2px
+  }
+  .mapInfo{
+    margin:0 0 -5px;
+    font-style: italic;
+    padding:1px 3px;
+    margin:3px;
+    border-radius: 10px;
+  }

@@ -1,0 +1,260 @@
+  <html>
+
+  <head>
+    <!-- Begin Css/js files for vertical tab-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/boot_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!-- End of Css/js files for vertical tab-->
+
+    <!-- JS files for single/multi country visualizations-->
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="js/Visualization.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/motionChart.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+    <!-- End of JS files for single/multi country visualizations-->
+
+    <!-- JS files for single/multi country visualizations-->
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>  
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $(".zoomable").hide();
+      $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+
+      });
+
+    var charts = [];
+    $(".map").hide();
+    $(".motion").hide();
+    $(".zoomable").hide();
+    <!-- $(".container").legend.group.hide(); -->
+    $('input[type="radio"]').click(function(){
+      
+      if($(this).attr("value")=="oneParameter"){
+        $(".motion").hide();
+        $(".map").show();
+        
+      }
+      else if($(this).attr("value")=="twoParameter"){
+        $(".map").hide();
+        $(".motion").show();
+        $(".zoomable").hide();
+      }
+      else{
+        $(".map").hide();
+        $(".motion").hide();
+        <!-- $(".zoomable").hide(); -->
+      }
+    });
+    
+    $('#container-chart0').mouseover(function(){
+      $('#container-chart1').tooltip.show();
+    });
+  	
+  });
+  </script>
+
+<style type="text/css">
+  body{
+  font-family: Abel; 
+  }
+
+  #wrapper1 {
+    height: 350px;
+    width: 1200px;
+    margin: 0 auto 0 auto ;
+    padding: 0;
+    overflow: hidden;
+
+
+  }
+  #wrapper2 {
+    height: 150px;
+    width: 1200px;
+    margin: 0 auto 0 auto ;
+    padding: 0;
+
+  }
+  #container_map {
+    float: left;
+    height: 290px; 
+    width: 500px; 
+    overflow: hidden;
+    padding-left: 20px 
+  }
+  #info0{
+    float: left;
+    height: 300px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin:  0 0 0 0;
+    overflow: hidden;
+    width: 25%;
+  }
+  #info0 h3 {
+    display: inline;
+    font-size: 13pt;
+  }
+  #info0 .f32 .flag {
+    vertical-align: bottom ;
+  }
+
+  #info0 h4 {
+    margin: 1em 0 0 0;
+  }
+
+  #info1 {
+    float: left;
+    height: 300px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin:  0 0 0 40px;
+    overflow: hidden;
+    width: 25%;
+  }
+  #info1 h3 {
+    display: inline;
+    font-size: 13pt;
+  }
+  #info1 .f32 .flag {
+    vertical-align: bottom ;
+  }
+
+  #info1 h4 {
+    margin: 1em 0 0 0;
+  }
+
+  #info2 {
+    float: left;
+    width: 300px;
+    height: 260px;
+    padding-left: 20px;
+    margin:  0 0 0 0;
+    overflow: hidden;
+    width: 20%;
+  }
+  #info2 h3 {
+    display: inline;
+    font-size: 13pt;
+  }
+  #info2 .f32 .flag {
+    vertical-align: bottom ;
+  }
+
+  #info2 h4 {
+    margin: 1em 0 0 0;
+  }
+  
+  #info {
+    float: left;
+    width: 350px;
+    height: 260px;
+    padding-left: 20px;
+    margin:  0 auto 0 auto;
+    overflow: hidden;
+    width: 20%;
+  }
+  #info h3 {
+    display: inline;
+    font-size: 13pt;
+  }
+  #info .f32 .flag {
+    vertical-align: bottom ;
+  }
+
+  #info h4 {
+    margin: 1em 0 0 0;
+  }
+
+  </style>
+  </head>
+
+  <body ng-app="myApp">
+    <div id="siteHeader">
+      <center>
+        <a href="home.html"> <img src="css/logo.png" style="width:25%;margin-top:8px;margin-bottom:-7px"/></a>
+      </center>
+    </div>
+    <div class="containerVertical">
+      <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+            <div class="list-group">
+              <a href="#" class="list-group-item active text-center">
+                <h4 class="glyphicon glyphicon-home"></h4><br/>Home
+              </a>
+              <a href="#" class="list-group-item text-center">
+                <h4 class="glyphicon glyphicon-signal"></h4><br/>Visualizations
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+
+            <div id="homePage" class="bhoechie-tab-content active">
+              
+
+               <div class="body-text-font" style="margin:10 0">
+  				<p class="intro">
+  				 1World Urban Development application aims to provide complete visualization experience in the form of interactive graphs and map 
+  				 for all countries. Application offers detail on demand, zoom in feature and easy options to download the graph in multiple formats. 
+  				 User would be able to analyze, compare and visualize urban development data for the past 6 decades.
+  				</p>
+  				
+  				<p>
+  				<span class="subheading">Country Analysis</span><br>
+  				 Visualize the trend of a particular country based on 14 different urban development parameters in user frinedly line charts or barcharts. Detail on demand and zoom in feature available for generated graphs. 
+  				</p>
+  				<p>
+  				<span class="subheading">Multi-Country Comparison</span><br>
+  				Compare the growth rate of various countries effectively based on any of urban development parameter. Additional visulization techniques such as stacked bar chart, scatter plots are available to compress the required information. 
+  				</p>
+  				<p>
+  				<span class="subheading">Map Based Visualization</span><br>
+  				Map based visualization provides a beautiful linking of data where users can select multiplle countries in world map one after another and visualize the link between the selected year and the historic urban development trend. 
+  				</p>
+              <span class="subheading">Motion Visualization</span><br>
+          Dynamic motion charts based on bubble visualization, taking two parameters for comparison, which change over time with a built-in auto play feature to visualize the trend in urban development. It shows an interactive exploration and visualization of longitudinal multivariate data.
+          </p>
+  			 </div>
+
+              
+            </div>
+
+            <!-- A Country Analysis section -->
+    
+
+            <div id="singleCountryVisualization" class="bhoechie-tab-content" ng-controller="jsonDataCtrl_single">
+            
+
+
+
+    hhiphuoh
+
+           </div>
+
+
+  	   
+      </div>
+    </div>
+  </div>
+  </div>
+
+  </body>

@@ -1,0 +1,232 @@
+<html>
+
+<head>
+  <!-- Begin Css/js files for vertical tab-->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/boot_style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <!-- End of Css/js files for vertical tab-->
+
+  <!-- JS files for single/multi country visualizations-->
+  <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+  <script src="js/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+  <script src="js/Visualization.js"></script>
+  <script src="js/underscore-min.js"></script>
+  <script src="js/motionChart.js"></script>
+  <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+  <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+  <!-- End of JS files for single/multi country visualizations-->
+
+  <!-- JS files for single/multi country visualizations-->
+  <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+  <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>  
+  
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $(".zoomable").hide();
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+      e.preventDefault();
+      $(this).siblings('a.active').removeClass("active");
+      $(this).addClass("active");
+      var index = $(this).index();
+      $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+      $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+
+    });
+
+	//multi country jquery opertaions 
+  $('#multiselect').on('change', function() {
+   $('#parameter').prop('disabled', false)
+ });
+  $('#parameter').on('change', function() {
+   $('#stackedBarChart').prop('disabled', false)
+   $('#lineChart').prop('disabled', false)
+   $('#scatterPlot').prop('disabled', false)
+
+ });
+	//end of multi country jquery opertaions 
+
+	//single country jquery operations
+ $('#country_single').on('change', function() {
+  $('#parameter_single').prop('disabled', false)
+});
+ $('#parameter_single').on('change', function() {
+  $('#lineChart_single').prop('disabled', false)
+  $('#barChart_single').prop('disabled', false)
+
+});
+	//end of single country operations
+	
+});
+</script>
+
+<style type="text/css">
+body{
+font-family: Abel; 
+}
+</style>
+</head>
+
+<body ng-app="myApp">
+  <div id="siteHeader">
+    <center>
+      <a href="home.html"> <img src="css/logo.png" style="width:25%;margin-top:8px;margin-bottom:-7px"/></a>
+    </center>
+  </div>
+  <div class="containerVertical">
+    <div class="row">
+      <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+          <div class="list-group">
+            <a href="#" class="list-group-item active text-center">
+              <h4 class="glyphicon glyphicon-home"></h4><br/>Home
+            </a>
+            <a href="#" class="list-group-item text-center">
+              <h4 class="glyphicon glyphicon-signal"></h4><br/>Country Analysis
+            </a>
+            <a href="#" class="list-group-item text-center">
+              <h4 class="glyphicon glyphicon-th-large"></h4><br/>Multi-Country Comparison
+            </a>
+            <a href="#" class="list-group-item text-center">
+              <h4 class="glyphicon glyphicon-globe"></h4><br/>Map Based Visualization
+            </a>
+			<a href="#" class="list-group-item text-center">
+              <h4 class="glyphicon glyphicon-play-circle"></h4><br/>Motion Visualization
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+
+          <div id="homePage" class="bhoechie-tab-content active">
+            
+
+             <div class="body-text-font" style="margin:10 0">
+				<p class="intro">
+				 World Urban Development application aims to provide complete visualization experience in the form of interactive graphs and map 
+				 for all countries. Application offers detail on demand, zoom in feature and easy options to download the graph in multiple formats. 
+				 User would be able to analyze, compare and visualize urban development data for the past 6 decades.
+				</p>
+				
+				<p>
+				<span class="subheading">Country Analysis</span><br>
+				 Visualize the trend of a particular country based on 14 different urban development parameters in user frinedly line charts or barcharts. Detail on demand and zoom in feature available for generated graphs. 
+				</p>
+				<p>
+				<span class="subheading">Multi-Country Comparison</span><br>
+				Compare the growth rate of various countries effectively based on any of urban development parameter. Additional visulization techniques such as stacked bar chart, scatter plots are available to compress the required information. 
+				</p>
+				<p>
+				<span class="subheading">Map Based Visualization</span><br>
+				Map based visualization provides a beautiful linking of data where users can select multiplle countries in world map one after another and visualize the link between the selected year and the historic urban development trend. 
+				</p>
+            <span class="subheading">Motion Visualization</span><br>
+        Dynamic motion charts based on bubble maps which change over time with a built-in auto play feature to visualize the trend in urban development. It shows an interactive exploration and visualization of longitudinal multivariate data.
+        </p>
+			 </div>
+
+            
+          </div>
+
+          <!-- A Country Analysis section -->
+  
+
+          <div id="singleCountryVisualization" class="bhoechie-tab-content" ng-controller="jsonDataCtrl_single">
+              <div class="row">
+                <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Country</span></div> 
+                <div class="col-md-5"><span class="subheading">Choose Parameter</span> </div>
+              </div>
+
+          <div class="row">
+            <div style="margin-left: 83px" class="col-md-5 text-font">
+           <input style="height:20px;width: 65%" id="country_single" type="text" ng-model="countrySelected_single" uib-typeahead="country for country in countries_single | filter:$viewValue" class="form-control" placeholder="Start Typing a Country's Name..">
+           </div>
+
+           <select style="margin-left:14px" id="parameter_single" ng-model="paramSelected_single" ng-options='param for param in params_single' disabled></select>
+         </div>
+            <div style="margin:35 0 0 180;text-align:center">
+              <button type="button" class="btn btn-primary btn-spacing" id="lineChart_single" ng-click="showChart_single(0)" disabled>Line Chart</button>
+              <button type="button" class="btn btn-primary btn-spacing" id="barChart_single" ng-click="showChart_single(1)" disabled>Bar Chart</button>
+            </div>
+           <div id="container_single" class="container" style="min-width: 260px; height: 360px; margin: 50 auto"></div>
+		   <p class="zoomable">The graph is zoomable. Select the area to be zoomed in by click and drag of the mouse.</p>
+         </div>
+
+         <!-- Multi-Country Comparison --> 
+         <div id="multiCountryVisualization" class="bhoechie-tab-content" ng-controller="MyCtrl">
+          <div class="row">
+            <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Country</span></div>
+            <div class="col-md-5"><span class="subheading">Choose Parameter</span></div>
+          </div>
+          <div>
+            <select class="multiselect" id="multiselect"
+            ng-model="countrySelected" ng-options="country for country in countries"
+            multiple="multiple" multiselect-dropdown style="height: 110px"></select>              
+          </div>
+          <select style="margin-top:-110px; margin-left:435px" id="parameter" ng-model="paramSelected" ng-options='param for param in params' disabled></select>
+
+          <div id="comparisonButtons" >
+              <button id="lineChart" type="button" class="btn btn-primary btn-spacing" style='margin-left:115px' id="lineChart" ng-click="showChart(1)" disabled>Line Chart</button>
+              <button id="stackedBarChart" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(0)" disabled>Stacked Bar Chart</button>
+              <button id="scatterPlot" type="button" class="btn btn-primary btn-spacing" id="lineChart" ng-click="showChart(2)" disabled>Scatter Plot</button>
+          </div>
+          <center>
+            <div id="container" style="min-width: 260px; height: 360px; margin: 50 auto"></div>
+			<p class="zoomable">The graph is zoomable. Select the area to be zoomed in by click and drag of the mouse.</p>
+          </center>
+
+        </div>
+
+        <!-- Map based visualization -->
+        <div class="bhoechie-tab-content" ng-controller="jsonMapCtrl">
+
+          <div class="row">
+                <div style="margin-left: 79px" class="col-md-5"><span class="subheading">Choose Year</span></div> 
+                <div class="col-md-5"><span class="subheading">Choose Parameter</span> </div>
+          </div>
+   
+          <div id="wrapper">
+            <div class="row">
+                <div style="margin-left: 85px" class="col-md-5"><span><select style="width:65%" id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'> </select></span></div> 
+                <div class="col-md-5"><span><select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'></select></span> </div>
+          </div>
+            
+      			
+      			<div id="container_map" style="margin:2px;padding:2px;margin-left:5px">
+                 <center style="margin-top:60px">
+                  <h1 class="glyphicon glyphicon-globe" style="font-size:12em;color:#55518a"></h1>
+                  <h4 style="margin-top: 0;color:#55518a"> Choose Year and Parameter to View Map Visualization</h4>
+              </center>
+            </div>
+      			<div id="info">
+      				<span class="f32"><span id="flag"></span></span>
+      				<h2></h2>
+      				<div id='subheader' class="subheader"></div>
+
+      				<center><div id="country-chart" style="height:250px;width:700px"></div></center>
+      			</div>
+      		</div>
+ 
+       </div>
+	   
+	   <!-- Motion Visualization -->
+        <div class="bhoechie-tab-content">
+  			<div id="chart_div" style="width: 600px; height: 400px;float:left;margin-left:60px";>
+  				<script type="text/javascript">
+  					motionChart();
+  				</script>
+  			</div>
+       </div>
+	   
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
