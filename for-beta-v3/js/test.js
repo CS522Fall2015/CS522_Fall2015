@@ -1723,8 +1723,8 @@ myApp.controller("jsonMapCtrl", function($scope, $http, $timeout, $interval) {
 		        spacingRight: 0,
 				
 		        // Explicitly tell the width and height of a chart
-		        width: null,
-		        height: 300
+		        width: 650,
+		        height: 320
 		},
 
             // tooltip: {

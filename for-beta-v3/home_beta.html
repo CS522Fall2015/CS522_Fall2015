@@ -84,19 +84,19 @@
 	}
 	#container_map {
 		float: left;
-		height: 292px; 
-		width: 600px; 
+		height: 340px; 
+		width: 700px; 
 		overflow: hidden;
 		padding-left: 20px 
 	}
 	#info0{
 		float: left;
 		height: 300px;
-		padding-left: 20px;
-		padding-right: 20px;
+/*		padding-left: 20px;
+		padding-right: 20px;*/
 		margin: -4 0 0 0;
 		overflow: hidden;
-		width: 25%;
+		width: 20%;
 	}
 	#info0 h3 {
 		display: inline;
@@ -113,11 +113,11 @@
 	#info1 {
 		float: left;
 		height: 300px;
-		padding-left: 20px;
-		padding-right: 20px;
+	/*	padding-left: 20px;
+		padding-right: 20px;*/
 		margin:  -4 0 0 40px;
 		overflow: hidden;
-		width: 25%;
+		width: 20%;
 	}
 	#info1 h3 {
 		display: inline;
@@ -240,7 +240,7 @@
 							<select id="year" ng-model='yearSelected' ng-options='param for param in years' ng-change='createData()'> 
 							</select>
 						</span>
-						<span  class="subheading">Choose Parameter</span>
+						<span  class="subheading" style="margin-left:87px">Choose Parameter</span>
 						<span>
 							<select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'>
 							</select>
@@ -249,7 +249,7 @@
 				  
 					<!-- <br> -->
 				<div style="margin-top:5px;">
-					<div><span class="mapInfo"></span> <span class="zoomleg"></span></div>
+					<div><span class="mapInfo" style="margin-left:245px"></span> <span class="zoomleg"></span></div>
 					<div id="container_map"></div>
 					<div id="info0">
 						<h3 id="header0"></h3>
@@ -266,7 +266,7 @@
 				
 				
 				
-				<div id="wrapper2" style="margin-top:-5px">
+				<div id="wrapper2" style="margin-top:-27px">
 					<div id="info">
 						<h3 id="header2"></h3>
 						<div id='subheader2' ></div>
