@@ -1,0 +1,488 @@
+  <html>
+
+  <head>
+    <!-- Begin Css/js files for vertical tab-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/boot_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!-- End of Css/js files for vertical tab-->
+
+    <!-- JS files for single/multi country visualizations-->
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/motionChart.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+	<script src="js/Visualization.js"></script>
+    <!-- End of JS files for single/multi country visualizations-->
+
+    <!-- JS files for single/multi country visualizations-->
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>  
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+		var charts = [];
+		$(".map").hide();
+		$(".motion").hide();
+		$(".zoomable").hide();
+		<!-- $(".container").legend.group.hide(); -->
+		$('input[type="radio"]').click(function(){
+			
+			if($(this).attr("value")=="oneParameter"){
+				$(".motion").hide();
+				$(".map").show();
+				
+			}
+			else if($(this).attr("value")=="twoParameter"){
+				$(".map").hide();
+				$(".motion").show();
+				$(".zoomable").hide();
+			}
+			else{
+				$(".map").hide();
+				$(".motion").hide();
+				<!-- $(".zoomable").hide(); -->
+			}
+		});
+		
+		$('#container-chart0').mouseover(function(){
+			$('#container-chart1').tooltip.show();
+		});
+
+		//accordion
+		    var active = true;
+	    $('#accordion').on('show.bs.collapse', function () {
+	        if (active) $('#accordion .in').collapse('hide');
+	    });
+
+	});
+  </script>
+
+  <style type="text/css">
+  body{
+  font-family: Abel; 
+  }
+
+	#wrapper1 {
+		margin: 0 auto 0 auto ;
+		padding: 0;
+		overflow: hidden;
+	}
+	#wrapper2 {
+		height: 150px;
+		width: auto;
+		margin: 0 auto 0 auto ;
+		padding: 0;
+
+	}
+	#container_map {
+		float: left;
+		height: 340px; 
+		width: 700px; 
+		overflow: hidden;
+		padding-left: 20px 
+	}
+	#info0{
+		float: left;
+		height: 300px;
+/*		padding-left: 20px;
+		padding-right: 20px;*/
+		margin: -4 0 0 0;
+		overflow: hidden;
+		width: 20%;
+	}
+	#info0 h3 {
+		display: inline;
+		font-size: 13pt;
+	}
+	#info0 .f32 .flag {
+		vertical-align: bottom ;
+	}
+
+	#info0 h4 {
+		margin: 1em 0 0 0;
+	}
+
+	#info1 {
+		float: left;
+		height: 300px;
+	/*	padding-left: 20px;
+		padding-right: 20px;*/
+		margin:  -4 0 0 40px;
+		overflow: hidden;
+		width: 20%;
+	}
+	#info1 h3 {
+		display: inline;
+		font-size: 13pt;
+	}
+	#info1 .f32 .flag {
+		vertical-align: bottom ;
+	}
+
+	#info1 h4 {
+		margin: 1em 0 0 0;
+	}
+
+	#info2 {
+		float: left;
+		width: 300px;
+		height: 260px;
+		padding-left: 20px;
+		margin:  0 0 0 0;
+		overflow: hidden;
+		width: 20%;
+	}
+	#info2 h3 {
+		display: inline;
+		font-size: 13pt;
+	}
+	#info2 .f32 .flag {
+		vertical-align: bottom ;
+	}
+
+	#info2 h4 {
+		margin: 1em 0 0 0;
+	}
+	
+	#info {
+		float: left;
+		width: 350px;
+		height: 260px;
+		padding-left: 20px;
+		margin:  0 auto 0 auto;
+		overflow: hidden;
+		width: 20%;
+	}
+	#info h3 {
+		display: inline;
+		font-size: 13pt;
+	}
+	#info .f32 .flag {
+		vertical-align: bottom ;
+	}
+
+	#info h4 {
+		margin: 1em 0 0 0;
+	}
+.tab-pane, .nav-tabs{
+  margin:1px 10px;
+  /*padding:5px;*/
+}
+
+   .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus {
+          color: #5A55A3;
+          cursor: default;
+          background-color: lavender;
+          border: 1px solid #dddddd;
+          border-bottom-color: transparent;
+          } 
+
+
+  </style>
+  </head>
+
+  <body ng-app="myApp">
+    <div id="siteHeader">
+      <center>
+        <a href="index.html"> <img src="css/logo_new.png" style="width:25%;margin-top:8px;"/></a>
+      </center>
+    </div>
+
+	<div class="horizontal_tab" style="width:99%">
+	  <ul class="nav nav-tabs nav-justified">
+	    <li class="active"><a data-toggle="tab" href="#home"><h4 class="glyphicon glyphicon-home"></h4>&nbsp;&nbsp;Home</a></li>
+	    <li><a data-toggle="tab" href="#menu1"><h4 class="glyphicon glyphicon-globe"></h4>&nbsp;&nbsp;Visualizations</a></li>
+	    <li><a data-toggle="tab" href="#menu2"><h4 class="glyphicon glyphicon-info-sign"></h4>&nbsp;&nbsp;Help</a></li>
+	  </ul>
+
+	  <div class="tab-content">
+	    <div id="home" class="tab-pane fade in active">
+           <div class="body-text-font" style="margin:2px 30px;padding:20px;">
+  				<p class="intro">
+  				 World Urban Development application aims to provide complete visualization experience in the form of interactive graphs and map 
+  				 for all countries. Application offers detail on demand, zoom in feature and easy options to download the graph in multiple formats. 
+  				 User would be able to analyze, compare and visualize urban development data for the past 6 decades.
+  				 A unique feature of our website is ability to compare devlopment of countries based on multiple parameters in a singel overlayed view for better understanding. Two dimensional visulaization, Auto Play feature, ability to control the speed, on-demand color change are some of added functionalties.
+  				</p>
+  				
+  				<p>
+  				<span class="subheading">Map Based Visualization</span><br>
+  				Map based visualization provides a beautiful linking of data where users can select multiplle countries in world map one after another and visualize the link between the selected year and the historic urban development trend. Users can select a particular year and a parameter from 14 most used urban development indices. A world map view is provided for required year. User can choose sequence of countries to compare them for historic period from 1960 to 2014 plotted aginst different parameters.
+  				</p>
+              <span class="subheading">Motion Visualization</span><br>
+          Dynamic motion charts based on bubble visualization, taking two parameters for comparison, which change over time with a built-in auto play feature to visualize the trend in urban development. Users can also control the auto play speed or they can manually slide through the years of interest. It shows an interactive exploration and visualization of longitudinal multivariate data in the form of bar chart and line chart.
+          The application allows to change the visualization color on demand.
+          </p>
+          <center><iframe width="620" height="315" src="https://www.youtube.com/embed/qQIK-i9E_kA" frameborder="0" allowfullscreen></iframe></center>
+  			 </div>
+	    </div>
+	    <div id="menu1" class="tab-pane fade">
+           <div>
+			<div id="metric">
+					<span class="subheading"> Choose Comparison Metrics</span>
+					<input style="margin-left: 15px" type="radio" id="oneParameter" name="oneParameter" value="oneParameter"> Compare One Parameter
+					<input style="margin-left: 20px" type="radio" name="oneParameter" id="twoParameter" value="twoParameter"> Compare Two Parameter
+			</div>
+			
+            <div id="mapbox"class="map" style="margin-top:6px;height:80%;width:101%;padding:10px 5px" ng-controller="jsonMapCtrl">
+				<div id="wrapper1">
+					<div>
+						<span class="subheading">Choose Year</span>
+						<span>
+							<select id="year" ng-model='yearSelected' ng-options='param for param in revYear' ng-change='createData()'> 
+							</select>
+						</span>
+						<span  class="subheading" style="margin-left:87px">Choose Parameter</span>
+						<span>
+							<select id="parameter" ng-model="paramSelected" ng-options='param for param in params' ng-change='createData()'>
+							</select>
+						</span> 
+					</div>
+				  
+					<!-- <br> -->
+				<div style="margin-top:5px;">
+					<div><span class="mapInfo" style="margin-left:245px"></span> <span class="zoomleg"></span></div>
+					<div id="container_map"></div>
+					<div id="info0">
+						<h3 id="header0"></h3>
+						<div id='subheader0' ></div>
+						<div id="country-chart0" ></div>
+					</div>     
+					<div id="info1">
+						<h3 id="header1"></h3>
+						<div id='subheader1' ></div>
+						<div id="country-chart1"></div>
+					</div>
+				</div>
+				</div>
+				
+				
+				
+				<div id="wrapper2" style="margin-top:-20px">
+					<div id="info">
+						<h3 id="header2"></h3>
+						<div id='subheader2' ></div>
+						<div id="country-chart2"></div>
+					</div>
+					<div id="info">
+						<h3 id="header3"></h3>
+						<div id='subheader3'></div>
+						<div id="country-chart3"></div>
+					</div>
+					<div id="info">
+						<h3 id="header4"></h3>
+						<div id='subheader4'></div>
+						<div id="country-chart4"></div>
+					</div>
+					<div id="info">
+						<h3 id="header5"></h3>
+						<div id='subheader5' ></div>
+						<div id="country-chart5"></div>
+					</div>	
+					<div id="info">
+						<h3 id="header6"></h3>
+						<div id='subheader6' ></div>
+						<div id="country-chart6"></div>
+					</div>				
+						
+				</div>
+			</div>
+		</div> 
+			
+	<!--  end of Motion Vis -->		
+  	   <!-- Motion Visualization -->
+		<div class="motion">
+			<center class="instructions">
+				Select the parameters from the x and y axis in the graph to compare.
+			</center>
+			<center>
+    			<div id="chart_div" style="width: 1000px; height: 500px;margin-left:100px";>
+    				<script type="text/javascript">
+    					motionChart();
+    				</script>
+    			</div>
+			</center>
+		</div>
+
+<!--  end of Motion Vis -->
+	    </div>
+	    <div id="menu2" class="tab-pane fade">
+	      	<!--Help Snapshots-->
+
+<br/><br/>
+		
+			<div class="panel-group" style="width:85%;margin:20px 50px" id="accordion">
+			    <!-- First Panel -->
+			    <div class="panel panel-default">
+			        <div class="panel-heading">
+			             <h4 class="panel-title"
+			                 data-toggle="collapse" 
+			                 data-target="#collapseOne">
+			                 How to Visualize One Parameter Comparison
+			             </h4>
+			        </div>
+			        <div id="collapseOne" class="panel-collapse collapse">
+			            <div class="panel-body">
+			            	<ul>
+			            		<li>Go to Visualizations Tab and select "One Parameter Visualisation" radio button </li>
+			            		<li>Choose required Year and a Parameter</li>
+			            		<img height="100px" width="600px"src="img/one_param.png"/>
+			            		<li>A world map would be displayed based on the selected parameter and year</li>
+			            		<li>Choose required Countries from the world map by holding Shift button and click</li>
+			            		<img height="300px" width="600px"src="img/multi-graph.png"/>
+			            		<li> 6 different parameters graphs are plotted.</li>
+			            	</ul>
+			            </div>
+			        </div>
+			    </div>
+			    
+			    <!-- Second Panel -->
+			    <div class="panel panel-default">
+			        <div class="panel-heading">
+			             <h4 class="panel-title" 
+			                 data-toggle="collapse" 
+			                 data-target="#collapseTwo">
+			                 How to Analyze One Country Parameter
+			             </h4>
+			        </div>
+			        <div id="collapseTwo" class="panel-collapse collapse">
+			            <div class="panel-body">
+		                	<ul>
+			            		<li>From the group of graphs displayed, hover over a particular country</li>
+			            		<li>When one country is selected in a graph, all countries graphs are highlighted</li>
+			            		<li>Zoom functionalities are also available where you have to click and drag the graph chart area</li>
+			            	</ul>
+			            </div>
+			        </div>
+			    </div>
+			    
+			    <!-- Third Panel -->
+			    <div class="panel panel-default">
+			        <div class="panel-heading">
+			             <h4 class="panel-title"
+			                 data-toggle="collapse"
+			                 data-target="#collapseThree">
+			                 How to Visualize Motion Graph
+			             </h4>
+			        </div>
+			        <div id="collapseThree" class="panel-collapse collapse">
+			            <div class="panel-body">
+			               	<ul>
+			            		<li>Go to Visualizations tab and choose "Two Parameters"</li>
+			            			<img src="img/two_param.png" height="100px" width="750px">
+			            		<li>From the displayed 2 dimensional graph, select required parameters in X and Y axis</li>
+			            		<img height="300px" width="600px"src="img/motion_chart.png"/>
+			            		<li>You can either play the grpah by clicking "Play" button or manually slide through</li>
+			            		<img height="100px" width="600px"src="img/play.png"/>
+			            	</ul>
+
+			            </div>
+			        </div>
+			    </div>
+			    <!--fourt panel-->
+			        <div class="panel panel-default">
+			        <div class="panel-heading">
+			             <h4 class="panel-title"
+			                 data-toggle="collapse"
+			                 data-target="#collapseFour">
+			                 How to Visualize Bar Graph
+			             </h4>
+			        </div>
+			        <div id="collapseFour" class="panel-collapse collapse">
+			            <div class="panel-body">
+			               	<ul>
+			            		<li>Go to Visualizations tab and choose "Two Parameters"</li>
+			            			<img src="img/two_param.png" height="100px" width="750px">
+			            		<li>Click the Bar Graph button</li>
+			            		<img height="300px" width="600px"src="img/barchart.png"/>
+			            		<li>From the displayed 2 dimensional graph, select required parameters in X and Y axis</li>
+			            	</ul>
+
+			            </div>
+			        </div>
+			    </div>
+			    <!-- fifth panel-->
+			        <div class="panel panel-default">
+			        <div class="panel-heading">
+			             <h4 class="panel-title"
+			                 data-toggle="collapse"
+			                 data-target="#collapseFive">
+			                 How to Visualize Line Graph
+			             </h4>
+			        </div>
+			        <div id="collapseFive" class="panel-collapse collapse">
+			            <div class="panel-body">
+			               	<ul>
+			            		<li>Go to Visualizations tab and choose "Two Parameters"</li>
+			            			<img src="img/two_param.png" height="100px" width="750px">
+			            		<li>Click the Line Graph button</li>
+			            		<img height="300px" width="600px"src="img/linechart.png"/>
+			            		<li>From the displayed graph, select required parameters Y axis</li>
+			            	</ul>
+
+			            </div>
+			        </div>
+			    </div>
+			    <!-- sixth panel-->
+			        <div class="panel panel-default">
+			        <div class="panel-heading">
+			             <h4 class="panel-title"
+			                 data-toggle="collapse"
+			                 data-target="#collapseSix">
+			                 How to Change Visulization Color
+			             </h4>
+			        </div>
+			        <div id="collapseSix" class="panel-collapse collapse">
+			            <div class="panel-body">
+			               	<ul>
+			            		<li>From the given visualization, select the color box</li>
+			            		<img src="img/color.png" height="300px" width="600px">
+			            		<li>From the displayed 2 dimensional graph, select required parameters in X and Y axis</li>
+			            	</ul>
+
+			            </div>
+			        </div>
+			    </div>
+			    <!--sevent panel-->
+			        <div class="panel panel-default">
+			        <div class="panel-heading">
+			             <h4 class="panel-title"
+			                 data-toggle="collapse"
+			                 data-target="#collapseSeven">
+			                 How to Highlight a Country in Any Graph
+			             </h4>
+			        </div>
+			        <div id="collapseSeven" class="panel-collapse collapse">
+			            <div class="panel-body">
+			               	<ul>
+			            		<li>In the displayed, visualization graph, hover over the grpah or select one</li>
+			            		<li>You can alternatively select the country name in check box</li>
+			            		<img height="300px" width="600px"src="img/select_country.png"/>
+			            		
+			            	</ul>
+
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		
+<!-- end of accordion-->
+	    </div>
+	  </div>
+	</div>
+
+
+  </body>
